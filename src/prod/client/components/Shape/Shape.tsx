@@ -4,6 +4,7 @@ import * as React from "react";
 import PrimaryContext from "@client/contexts/PrimaryContext";
 import DOMUtils from "@utils/DOMUtils";
 import { AttributeSelector } from "@typings/general";
+import JsonSvg from "@components/JsonSvg/JsonSvg";
 
 export interface ShapeProps {
 	shape: AttributeSelector;
@@ -26,8 +27,13 @@ export default class Shape extends React.PureComponent<ShapeProps, ShapeState> {
 					const shade = ctx.shades[this.props.shade];
 					const color = ctx.colors[this.props.color];
 
+					const { tagName, children } = shade;
+					const attributes = { ...shade.attributes, id: `pattern${this.props.shade}` };
+
 					return <svg viewBox="-10 -10 60 120" className="Shape" color={color}>
-						<defs className="Shape__defs">{shade(`pattern${this.props.shade}`)}</defs>
+						<defs className="Shape__defs">
+							<JsonSvg json={{ tagName, attributes, children }} />
+						</defs>
 						<path
 							d={shape}
 							className={DOMUtils.getBEMClassName("Shape__path", { [`pattern${this.props.shade}`]: true })} />
