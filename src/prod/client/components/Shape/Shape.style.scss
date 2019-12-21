@@ -1,0 +1,19 @@
+.Shape {
+	flex: 1 1 auto;
+
+	&__defs,
+	&__g {
+		stroke: currentColor;
+		stroke-width: 0.01em;
+	}
+
+	&__defs {
+		fill: currentColor;
+	}
+
+	&__g {
+		&--pattern0 { fill: url(#pattern0); }
+		&--pattern1 { fill: url(#pattern1); }
+		&--pattern2 { fill: url(#pattern2); }
+	}
+}

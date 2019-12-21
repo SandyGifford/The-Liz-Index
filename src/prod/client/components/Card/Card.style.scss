@@ -1,0 +1,16 @@
+.Card {
+	border: 0.05em solid #EEE;
+	background: #FEFEFE;
+	border-radius: 0.2em;
+	width: 1em;
+	height: 1.5em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.05em;
+
+	&__shape {
+		flex: 0 0 auto;
+		box-sizing: border-box;
+	}
+}
