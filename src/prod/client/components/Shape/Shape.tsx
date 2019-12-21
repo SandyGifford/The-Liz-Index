@@ -28,9 +28,9 @@ export default class Shape extends React.PureComponent<ShapeProps, ShapeState> {
 
 					return <svg viewBox="-10 -10 60 120" className="Shape" color={color}>
 						<defs className="Shape__defs">{shade(`pattern${this.props.shade}`)}</defs>
-						<g className={DOMUtils.getBEMClassName("Shape__g", { [`pattern${this.props.shade}`]: true })}>
-							{React.cloneElement(shape)}
-						</g>
+						<path
+							d={shape}
+							className={DOMUtils.getBEMClassName("Shape__path", { [`pattern${this.props.shade}`]: true })} />
 					</svg>;
 				}
 				}
