@@ -1,0 +1,1 @@
+export type AttributeSelector = 0 | 1 | 2;

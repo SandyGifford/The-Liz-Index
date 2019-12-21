@@ -3,13 +3,12 @@ import "./Shape.style";
 import * as React from "react";
 import PrimaryContext from "@client/contexts/PrimaryContext";
 import DOMUtils from "@utils/DOMUtils";
-
-export type ShapeAttSelector = 0 | 1 | 2;
+import { AttributeSelector } from "@typings/general";
 
 export interface ShapeProps {
-	shape: ShapeAttSelector;
-	color: ShapeAttSelector;
-	shade: ShapeAttSelector;
+	shape: AttributeSelector;
+	color: AttributeSelector;
+	shade: AttributeSelector;
 }
 export interface ShapeState { }
 

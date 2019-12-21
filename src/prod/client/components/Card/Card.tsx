@@ -6,14 +6,13 @@ import Loop from "@utils/Loop";
 import Shape from "../Shape/Shape";
 import MathUtils from "@utils/MathUtils";
 import DOMUtils from "@utils/DOMUtils";
-
-export type CardAttSelector = 0 | 1 | 2;
+import { AttributeSelector } from "@typings/general";
 
 export interface CardProps {
-	shape: CardAttSelector;
-	color: CardAttSelector;
-	count: CardAttSelector;
-	shade: CardAttSelector;
+	shape: AttributeSelector;
+	color: AttributeSelector;
+	count: AttributeSelector;
+	shade: AttributeSelector;
 	elevation?: number;
 	width?: number;
 	animated?: boolean;
