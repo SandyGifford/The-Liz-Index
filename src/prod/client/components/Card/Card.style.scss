@@ -29,7 +29,8 @@
 	}
 
 	&--animated {
-		transition: box-shadow 0.2s;
+		$time: 0.2s;
+		transition: box-shadow $time, transform $time;
 	}
 
 	&__shapes {

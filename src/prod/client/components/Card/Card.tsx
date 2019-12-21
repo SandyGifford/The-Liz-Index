@@ -17,6 +17,7 @@ export interface CardProps {
 	elevation?: number;
 	width?: number;
 	animated?: boolean;
+	repressOffset?: boolean;
 }
 export interface CardState { }
 
@@ -54,9 +55,11 @@ export default class Card extends React.PureComponent<CardProps, CardState> {
 	}
 
 	private getStyle(): React.CSSProperties {
-		const elevation = (this.props.elevation || 0) + 3;
+		const { repressOffset, elevation } = this.props;
+		const offsetElevation = (elevation || 0) + 3;
 		return {
-			boxShadow: elevation ? `${elevation / 5}px ${elevation / 5}px ${elevation / 2}px 0 rgba(0, 0, 0, ${(20 / (MathUtils.clamp(elevation, 0, 40))) - 0.5})` : null,
+			boxShadow: `${offsetElevation / 5}px ${offsetElevation / 5}px ${offsetElevation / 2}px 0 rgba(0, 0, 0, ${(20 / (MathUtils.clamp(offsetElevation, 0, 40))) - 0.5})`,
+			transform: !repressOffset && elevation ? `translate(${offsetElevation / -5}%, ${offsetElevation / -5}%)` : null,
 			width: this.props.width,
 		};
 	}
