@@ -5,23 +5,34 @@ import PrimaryContext, { primaryContextDefaultValue } from "@client/contexts/Pri
 import Card from "@components/Card/Card";
 
 export interface AppProps { }
-export interface AppState { }
+export interface AppState {
+	elevation: number;
+}
 
 export default class App extends React.PureComponent<AppProps, AppState> {
 	constructor(props: AppProps) {
 		super(props);
-		this.state = {};
+		this.state = {
+			elevation: 0,
+		};
+		document.addEventListener("mousemove", this.changeElevation);
 	}
 
 	public render(): React.ReactNode {
 		return (
 			<div className="App">
 				<PrimaryContext.Provider value={primaryContextDefaultValue}>
-					<div style={{ fontSize: 100 }}><Card shape={0} color={0} shade={0} count={0} height={0} /></div>
-					<div style={{ fontSize: 200 }}><Card shape={1} color={1} shade={1} count={1} height={1} /></div>
-					<div style={{ fontSize: 300 }}><Card shape={2} color={2} shade={2} count={2} height={2} /></div>
+					<Card shape={2} color={2} shade={2} count={2} width={100} animated elevation={this.state.elevation} />
+					<Card shape={1} color={1} shade={1} count={1} width={200} elevation={this.state.elevation} />
+					<Card shape={0} color={0} shade={0} count={0} width={300} elevation={this.state.elevation} />
 				</PrimaryContext.Provider>
 			</div>
 		);
 	}
+
+	private changeElevation = (e: MouseEvent) => {
+		this.setState({
+			elevation: e.clientX / 10,
+		});
+	};
 }

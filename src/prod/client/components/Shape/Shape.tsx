@@ -2,6 +2,7 @@ import "./Shape.style";
 
 import * as React from "react";
 import PrimaryContext from "@client/contexts/PrimaryContext";
+import DOMUtils from "@utils/DOMUtils";
 
 export type ShapeAttSelector = 0 | 1 | 2;
 
@@ -28,12 +29,13 @@ export default class Shape extends React.PureComponent<ShapeProps, ShapeState> {
 
 					return <svg viewBox="-10 -10 60 120" className="Shape" color={color}>
 						<defs className="Shape__defs">{shade(`pattern${this.props.shade}`)}</defs>
-						<g className={`Shape__g Shape__g--pattern${this.props.shade}`}>
+						<g className={DOMUtils.getBEMClassName("Shape__g", { [`pattern${this.props.shade}`]: true })}>
 							{React.cloneElement(shape)}
 						</g>
 					</svg>;
-				}}
-			</PrimaryContext.Consumer>
+				}
+				}
+			</PrimaryContext.Consumer >
 		);
 	}
 }

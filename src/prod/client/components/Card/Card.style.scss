@@ -1,16 +1,53 @@
 .Card {
-	border: 0.05em solid #EEE;
-	background: #FEFEFE;
-	border-radius: 0.2em;
-	width: 1em;
-	height: 1.5em;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.05em;
+	$ratio: 1.5;
 
-	&__shape {
-		flex: 0 0 auto;
+	position: relative;
+	border-radius: (10% * $ratio) unquote("/") 10%;
+	background: #EEE;
+	flex: 1 1 auto;
+	width: 100px;
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 2%;
+		left: 2% * $ratio;
+		right: 2% * $ratio;
+		bottom: 2%;
+		border-radius: (9% * $ratio) unquote("/") 9%;
+		background: #FEFEFE;
+	}
+
+	&::after {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 0;
+		padding-bottom: 100% * $ratio;
 		box-sizing: border-box;
+	}
+
+	&--animated {
+		transition: box-shadow 0.2s;
+	}
+
+	&__shapes {
+		position: absolute;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		padding: 0 5%;
+		box-sizing: border-box;
+		align-items: center;
+		justify-content: center;
+
+		&__shape {
+			flex: 0 0 auto;
+			display: flex;
+			box-sizing: border-box;
+		}
 	}
 }
