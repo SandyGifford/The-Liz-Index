@@ -1,12 +1,10 @@
 import "./Card.style";
 
 import * as React from "react";
-import PrimaryContext from "@client/contexts/PrimaryContext";
-import Loop from "@utils/Loop";
-import Shape from "../Shape/Shape";
 import MathUtils from "@utils/MathUtils";
 import DOMUtils from "@utils/DOMUtils";
 import { AttributeSelector } from "@typings/general";
+import ShapeGroup from "../ShapeGroup/ShapeGroup";
 
 export interface CardProps {
 	shape: AttributeSelector;
@@ -27,27 +25,15 @@ export default class Card extends React.PureComponent<CardProps, CardState> {
 	}
 
 	public render(): React.ReactNode {
-		const { color, shade, shape, animated } = this.props;
+		const { color, shade, shape, animated, count } = this.props;
 		return (
 			<div className={DOMUtils.getBEMClassName("Card", { animated })} style={this.getStyle()}>
-				<div className="Card__sizer" />
 				<div className="Card__shapes">
-					<PrimaryContext.Consumer>
-						{ctx => {
-							const count = ctx.counts[this.props.count];
-							const maxCount = Math.max(...ctx.counts);
-							const pWidth = `${100 / maxCount}%`;
-
-							return Loop.mapTimes(
-								count, i => <div key={i} className="Card__shapes__shape" style={{ flexBasis: pWidth }}>
-									<Shape
-										color={color}
-										shade={shade}
-										shape={shape} />
-								</div>
-							);
-						}}
-					</PrimaryContext.Consumer>
+					<ShapeGroup
+						color={color}
+						shade={shade}
+						shape={shape}
+						count={count} />
 				</div>
 			</div>
 		);

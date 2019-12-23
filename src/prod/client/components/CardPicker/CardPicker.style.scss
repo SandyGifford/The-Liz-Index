@@ -1,0 +1,11 @@
+.CardPicker {
+	&__row {
+		display: flex;
+
+		&__option {
+			width: 500px;
+			height: 500px;
+			position: relative;
+		}
+	}
+}

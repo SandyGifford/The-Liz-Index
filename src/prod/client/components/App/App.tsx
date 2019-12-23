@@ -1,8 +1,8 @@
 import "./App.style";
 
 import * as React from "react";
-import PrimaryContext, { primaryContextDefaultValue } from "@client/contexts/PrimaryContext";
-import Card from "@components/Card/Card";
+import Card from "../Card/Card";
+import CardPicker from "../CardPicker/CardPicker";
 
 export interface AppProps { }
 export interface AppState {
@@ -21,11 +21,8 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	public render(): React.ReactNode {
 		return (
 			<div className="App">
-				<PrimaryContext.Provider value={primaryContextDefaultValue}>
-					<Card shape={2} color={2} shade={2} count={2} width={100} animated elevation={this.state.elevation} />
-					<Card shape={1} color={1} shade={1} count={1} width={200} elevation={this.state.elevation} />
-					<Card shape={0} color={0} shade={0} count={0} width={300} elevation={this.state.elevation} />
-				</PrimaryContext.Provider>
+				<Card count={2} color={0} shade={1} shape={1} />
+				<CardPicker count={2} color={0} shade={1} shape={1} />
 			</div>
 		);
 	}
