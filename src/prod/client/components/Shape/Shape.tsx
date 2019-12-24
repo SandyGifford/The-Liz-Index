@@ -45,8 +45,7 @@ export default class Shape extends React.PureComponent<ShapeProps, ShapeState> {
 							style={{ fill: `url(#${patternId})` }}
 							className="Shape__path" />
 					</svg>;
-				}
-				}
+				}}
 			</PrimaryContext.Consumer >
 		);
 	}
