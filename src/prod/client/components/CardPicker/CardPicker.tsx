@@ -4,6 +4,7 @@ import * as React from "react";
 import { AttributeSelector } from "@typings/general";
 import ShapeGroup from "../ShapeGroup/ShapeGroup";
 import Loop from "@utils/Loop";
+import DOMUtils from "@utils/DOMUtils";
 
 export interface CardPickerProps {
 	shape: AttributeSelector;
@@ -23,28 +24,28 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 		const { shape, color, count, shade } = this.props;
 		return <div className="CardPicker">
 			<div className="CardPicker__row">{
-				Loop.mapTimes(3, i => <div key={i} className="CardPicker__row__option">
+				Loop.mapTimes(3, i => <div key={i} className={DOMUtils.getBEMClassName("CardPicker__row__option", { selected: i === count })}>
 					<div className="CardPicker__row__option__content">
 						<ShapeGroup count={i as AttributeSelector} color={color} shade={shade} shape={shape} />
 					</div>
 				</div>)
 			}</div>
 			<div className="CardPicker__row">{
-				Loop.mapTimes(3, i => <div key={i} className="CardPicker__row__option">
+				Loop.mapTimes(3, i => <div key={i} className={DOMUtils.getBEMClassName("CardPicker__row__option", { selected: i === color })}>
 					<div className="CardPicker__row__option__content">
 						<ShapeGroup count={count} color={i as AttributeSelector} shade={shade} shape={shape} />
 					</div>
 				</div>)
 			}</div>
 			<div className="CardPicker__row">{
-				Loop.mapTimes(3, i => <div key={i} className="CardPicker__row__option">
+				Loop.mapTimes(3, i => <div key={i} className={DOMUtils.getBEMClassName("CardPicker__row__option", { selected: i === shade })}>
 					<div className="CardPicker__row__option__content">
 						<ShapeGroup count={count} color={color} shade={i as AttributeSelector} shape={shape} />
 					</div>
 				</div>)
 			}</div>
 			<div className="CardPicker__row">{
-				Loop.mapTimes(3, i => <div key={i} className="CardPicker__row__option">
+				Loop.mapTimes(3, i => <div key={i} className={DOMUtils.getBEMClassName("CardPicker__row__option", { selected: i === shape })}>
 					<div className="CardPicker__row__option__content">
 						<ShapeGroup count={count} color={color} shade={shape} shape={i as AttributeSelector} />
 					</div>

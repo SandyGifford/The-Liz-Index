@@ -15,6 +15,10 @@
 				box-sizing: border-box;
 			}
 
+			&--selected {
+				background: magenta;
+			}
+
 			&__content {
 				position: absolute;
 				top: 0;
