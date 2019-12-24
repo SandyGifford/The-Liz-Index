@@ -1,16 +1,17 @@
 import "./ShapeGroup.style";
 
 import * as React from "react";
-import { AttributeSelector } from "@typings/general";
+import { AttributeSelector, ShapeAttributeSelector, ColorAttributeSelector, ShadeAttributeSelector } from "@typings/general";
 import Shape from "../Shape/Shape";
 import Loop from "@utils/Loop";
 import PrimaryContext from "@client/contexts/PrimaryContext";
 
 export interface ShapeGroupProps {
-	shape: AttributeSelector;
-	color: AttributeSelector;
-	count: AttributeSelector;
-	shade: AttributeSelector;
+	shape: ShapeAttributeSelector;
+	color: ColorAttributeSelector;
+	shade: ShadeAttributeSelector;
+	count?: AttributeSelector;
+	countOverride?: number;
 }
 export interface ShapeGroupState { }
 
@@ -21,11 +22,11 @@ export default class ShapeGroup extends React.PureComponent<ShapeGroupProps, Sha
 	}
 
 	public render(): React.ReactNode {
-		const { shape, color, shade } = this.props;
+		const { shape, color, shade, countOverride } = this.props;
 		return <div className="ShapeGroup">
 			<PrimaryContext.Consumer>
 				{ctx => {
-					const count = ctx.counts[this.props.count];
+					const count = typeof countOverride === "number" ? countOverride : ctx.counts[this.props.count];
 					const maxCount = Math.max(...ctx.counts);
 					const pWidth = `${100 / maxCount}%`;
 
