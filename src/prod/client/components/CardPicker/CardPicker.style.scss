@@ -2,9 +2,23 @@
 	&__row {
 		display: flex;
 
+		&__label {
+			flex: 0 0 10%;
+			width: 10%;
+			writing-mode: tb;
+			text-orientation: upright;
+			display: flex;
+			justify-content: center;
+			font-family: futura, sans-serif;
+		}
+
 		&__option {
 			flex: 1 1 auto;
 			position: relative;
+			background: rgb(234, 234, 255);
+			margin: 1%;
+			border-radius: 10%;
+			cursor: pointer;
 
 			&::before {
 				content: "";
@@ -16,7 +30,18 @@
 			}
 
 			&--selected {
-				background: magenta;
+				&::after {
+					content: "";
+					border-radius: 10%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					// TODO: get off yer butt and do the leg work to make percent borders
+					border: double rgb(117, 117, 212) 5px;
+					pointer-events: none;
+				}
 			}
 
 			&__content {
