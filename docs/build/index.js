@@ -86,9 +86,9 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./docs/shared/utils/DOMUtils.ts":
+/***/ "./dist/shared/utils/DOMUtils.ts":
 /*!***************************************!*\
-  !*** ./docs/shared/utils/DOMUtils.ts ***!
+  !*** ./dist/shared/utils/DOMUtils.ts ***!
   \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -96,7 +96,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DOMUtils; });
-/* harmony import */ var _Loop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _Loop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loop */ "./dist/shared/utils/Loop.ts");
 
 class DOMUtils {
     static getBEMClassName(baseName, modifiers) {
@@ -111,9 +111,9 @@ class DOMUtils {
 
 /***/ }),
 
-/***/ "./docs/shared/utils/Loop.ts":
+/***/ "./dist/shared/utils/Loop.ts":
 /*!***********************************!*\
-  !*** ./docs/shared/utils/Loop.ts ***!
+  !*** ./dist/shared/utils/Loop.ts ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -148,9 +148,9 @@ class Loop {
 
 /***/ }),
 
-/***/ "./docs/shared/utils/MathUtils.ts":
+/***/ "./dist/shared/utils/MathUtils.ts":
 /*!****************************************!*\
-  !*** ./docs/shared/utils/MathUtils.ts ***!
+  !*** ./dist/shared/utils/MathUtils.ts ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -32855,8 +32855,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Card_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Card_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/MathUtils */ "./docs/shared/utils/MathUtils.ts");
-/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
+/* harmony import */ var _utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/MathUtils */ "./dist/shared/utils/MathUtils.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./dist/shared/utils/DOMUtils.ts");
 
 
 
@@ -32936,8 +32936,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ShapeGroup/ShapeGroup */ "./src/prod/client/components/ShapeGroup/ShapeGroup.tsx");
-/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
-/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./dist/shared/utils/Loop.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./dist/shared/utils/DOMUtils.ts");
 /* harmony import */ var _components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/TextByWidth/TextByWidth */ "./src/prod/client/components/TextByWidth/TextByWidth.tsx");
 
 
@@ -33240,7 +33240,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Shape_Shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/Shape/Shape */ "./src/prod/client/components/Shape/Shape.tsx");
-/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./dist/shared/utils/Loop.ts");
 /* harmony import */ var _client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @client/contexts/PrimaryContext */ "./src/prod/client/contexts/PrimaryContext.ts");
 
 
