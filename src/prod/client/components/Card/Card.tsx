@@ -3,15 +3,8 @@ import "./Card.style";
 import * as React from "react";
 import MathUtils from "@utils/MathUtils";
 import DOMUtils from "@utils/DOMUtils";
-import { AttributeSelector, ShapeAttributeSelector, ColorAttributeSelector, ShadeAttributeSelector } from "@typings/general";
-import ShapeGroup from "../ShapeGroup/ShapeGroup";
 
 export interface CardProps {
-	shape: ShapeAttributeSelector;
-	color: ColorAttributeSelector;
-	shade: ShadeAttributeSelector;
-	count?: AttributeSelector;
-	countOverride?: number;
 	elevation?: number;
 	width?: number;
 	animated?: boolean;
@@ -26,16 +19,11 @@ export default class Card extends React.PureComponent<CardProps, CardState> {
 	}
 
 	public render(): React.ReactNode {
-		const { color, shade, shape, animated, count, countOverride } = this.props;
+		const { animated, children } = this.props;
 		return (
 			<div className={DOMUtils.getBEMClassName("Card", { animated })} style={this.getStyle()}>
-				<div className="Card__shapes">
-					<ShapeGroup
-						color={color}
-						shade={shade}
-						shape={shape}
-						count={count}
-						countOverride={countOverride} />
+				<div className="Card__content">
+					{children}
 				</div>
 			</div>
 		);
@@ -44,6 +32,7 @@ export default class Card extends React.PureComponent<CardProps, CardState> {
 	private getStyle(): React.CSSProperties {
 		const { repressOffset, elevation } = this.props;
 		const offsetElevation = (elevation || 0) + 3;
+
 		return {
 			boxShadow: `${offsetElevation / 5}px ${offsetElevation / 5}px ${offsetElevation / 2}px 0 rgba(0, 0, 0, ${(20 / (MathUtils.clamp(offsetElevation, 0, 40))) - 0.5})`,
 			transform: !repressOffset && elevation ? `translate(${offsetElevation / -5}%, ${offsetElevation / -5}%)` : null,

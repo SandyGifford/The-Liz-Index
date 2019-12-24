@@ -1,7 +1,8 @@
 import "./App.style";
 
 import * as React from "react";
-import CardPicker, { CardPickerChanged } from "../CardPicker/CardPicker";
+import CardPicker, { CardPickerChanged } from "@components/CardPicker/CardPicker";
+import SetCard from "@components/SetCard/SetCard";
 import { AttributeSelector } from "@typings/general";
 
 export interface AppProps { }
@@ -29,6 +30,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 		return (
 			<div className="App">
 				<CardPicker count={count} color={color} shade={shade} shape={shape} onChange={this.pickerChanged} />
+				<SetCard count={count} color={color} shade={shade} shape={shape} />
 			</div>
 		);
 	}

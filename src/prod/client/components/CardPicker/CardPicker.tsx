@@ -2,10 +2,10 @@ import "./CardPicker.style";
 
 import * as React from "react";
 import { AttributeSelector } from "@typings/general";
-import ShapeGroup from "../ShapeGroup/ShapeGroup";
+import ShapeGroup from "@components/ShapeGroup/ShapeGroup";
 import Loop from "@utils/Loop";
 import DOMUtils from "@utils/DOMUtils";
-import TextByWidth from "../TextByWidth/TextByWidth";
+import TextByWidth from "@components/TextByWidth/TextByWidth";
 
 export type CardPickerChanged = (shape: AttributeSelector, color: AttributeSelector, count: AttributeSelector, shade: AttributeSelector) => void;
 

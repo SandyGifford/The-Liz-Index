@@ -2,7 +2,7 @@ import "./ShapeGroup.style";
 
 import * as React from "react";
 import { AttributeSelector, ShapeAttributeSelector, ColorAttributeSelector, ShadeAttributeSelector } from "@typings/general";
-import Shape from "../Shape/Shape";
+import Shape from "@components/Shape/Shape";
 import Loop from "@utils/Loop";
 import PrimaryContext from "@client/contexts/PrimaryContext";
 

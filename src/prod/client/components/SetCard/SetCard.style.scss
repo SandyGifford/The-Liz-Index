@@ -33,10 +33,10 @@
 		transition: box-shadow $time, transform $time;
 	}
 
-	&__content {
+	&__shapes {
 		width: 100%;
 		position: absolute;
-		padding: 5%;
+		padding: 0 5%;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
