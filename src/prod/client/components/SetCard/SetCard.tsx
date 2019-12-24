@@ -28,16 +28,18 @@ export default class SetCard extends React.PureComponent<SetCardProps, SetCardSt
 			count,
 			countOverride,
 			elevation,
-			width,
 			animated,
 			repressOffset,
+			className,
+			style,
 		} = this.props;
 
 		return (
 			<Card
 				elevation={elevation}
-				width={width}
 				animated={animated}
+				className={className}
+				style={style}
 				repressOffset={repressOffset}>
 				<ShapeGroup
 					color={color}

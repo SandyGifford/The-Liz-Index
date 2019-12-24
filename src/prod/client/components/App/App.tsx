@@ -30,10 +30,10 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		return (
 			<div className="App">
-				<Card width={500}>
+				<Card className="App__card">
 					<CardPicker count={count} color={color} shade={shade} shape={shape} onChange={this.pickerChanged} />
 				</Card>
-				<SetCard width={500} count={count} color={color} shade={shade} shape={shape} />
+				<SetCard className="App__card" count={count} color={color} shade={shade} shape={shape} />
 			</div>
 		);
 	}
