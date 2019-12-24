@@ -1,7 +1,6 @@
 import "./App.style";
 
 import * as React from "react";
-import Card from "../Card/Card";
 import CardPicker from "../CardPicker/CardPicker";
 
 export interface AppProps { }
@@ -21,7 +20,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 	public render(): React.ReactNode {
 		return (
 			<div className="App">
-				<Card count={2} color={0} shade={1} shape={1} />
 				<CardPicker count={2} color={0} shade={1} shape={1} />
 			</div>
 		);
