@@ -4,6 +4,7 @@ import * as React from "react";
 import CardPicker, { CardPickerChanged } from "@components/CardPicker/CardPicker";
 import SetCard from "@components/SetCard/SetCard";
 import { AttributeSelector } from "@typings/general";
+import Card from "../Card/Card";
 
 export interface AppProps { }
 export interface AppState {
@@ -29,8 +30,10 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
 		return (
 			<div className="App">
-				<CardPicker count={count} color={color} shade={shade} shape={shape} onChange={this.pickerChanged} />
-				<SetCard count={count} color={color} shade={shade} shape={shape} />
+				<Card width={500}>
+					<CardPicker count={count} color={color} shade={shade} shape={shape} onChange={this.pickerChanged} />
+				</Card>
+				<SetCard width={500} count={count} color={color} shade={shade} shape={shape} />
 			</div>
 		);
 	}
