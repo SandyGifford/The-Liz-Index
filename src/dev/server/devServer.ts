@@ -8,6 +8,10 @@ import routing from "./routing";
 import http from "http";
 import prodApp from "../../../docs/server/server";
 
+require("dotenv").config();
+process.env.APP_PORT = process.env.APP_PORT || "3001";
+process.env.DEV_PORT = process.env.DEV_PORT || "3000";
+
 fs.emptyDir(path.resolve(process.cwd(), "docs", "build"));
 
 const devApp = express();
@@ -17,14 +21,14 @@ fs.emptyDir(path.resolve(process.cwd(), "docs", "build"));
 const devServer = http.createServer(devApp);
 devApp.use(routing);
 
-devServer.listen(3000, () => {
+devServer.listen(process.env.DEV_PORT, () => {
 	addWebpack(devServer, () => {
-		console.log("Dev ready.  Listening at http://localhost:3000");
+		console.log(`Dev ready.  Listening at http://localhost:${process.env.DEV_PORT}`);
 	});
 });
 
 const prodServer = http.createServer(prodApp);
 
-prodServer.listen(3001, () => {
-	console.log("App ready on port 3000");
+prodServer.listen(process.env.APP_PORT, () => {
+	console.log(`App ready on port ${process.env.APP_PORT}`);
 });
