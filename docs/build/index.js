@@ -86,9 +86,9 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./dist/shared/utils/DOMUtils.ts":
+/***/ "./docs/shared/utils/DOMUtils.ts":
 /*!***************************************!*\
-  !*** ./dist/shared/utils/DOMUtils.ts ***!
+  !*** ./docs/shared/utils/DOMUtils.ts ***!
   \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -96,7 +96,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DOMUtils; });
-/* harmony import */ var _Loop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loop */ "./dist/shared/utils/Loop.ts");
+/* harmony import */ var _Loop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loop */ "./docs/shared/utils/Loop.ts");
 
 class DOMUtils {
     static getBEMClassName(baseName, modifiers) {
@@ -111,9 +111,9 @@ class DOMUtils {
 
 /***/ }),
 
-/***/ "./dist/shared/utils/Loop.ts":
+/***/ "./docs/shared/utils/Loop.ts":
 /*!***********************************!*\
-  !*** ./dist/shared/utils/Loop.ts ***!
+  !*** ./docs/shared/utils/Loop.ts ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -148,9 +148,9 @@ class Loop {
 
 /***/ }),
 
-/***/ "./dist/shared/utils/MathUtils.ts":
+/***/ "./docs/shared/utils/MathUtils.ts":
 /*!****************************************!*\
-  !*** ./dist/shared/utils/MathUtils.ts ***!
+  !*** ./docs/shared/utils/MathUtils.ts ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -178,7 +178,7 @@ class MathUtils {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".App {\n  user-select: none;\n  display: flex;\n}\n.App__card {\n  flex: 1 1 50%;\n}", ""]);
+exports.push([module.i, ".App {\n  user-select: none;\n}\n.App__pickers {\n  display: flex;\n  width: 100%;\n}\n.App__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.App__cards {\n  display: flex;\n  width: 75%;\n  margin: 2% auto 0 auto;\n}\n.App__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -32772,8 +32772,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
-/* harmony import */ var _components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
-/* harmony import */ var _Card_Card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
+
 
 
 
@@ -32782,27 +32784,27 @@ __webpack_require__.r(__webpack_exports__);
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.pickerChanged = (shape, color, count, shade) => {
-            this.setState({
-                shape,
-                color,
-                count,
-                shade,
-            });
-        };
         this.state = {
-            shape: 0,
-            color: 0,
-            count: 0,
-            shade: 0,
+            cards: _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
+                shape: 0,
+                color: 0,
+                count: 0,
+                shade: 0,
+            })),
         };
     }
     render() {
-        const { shape, color, count, shade } = this.state;
+        const { cards } = this.state;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_Card_Card__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "App__card" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: color, shade: shade, shape: shape, onChange: this.pickerChanged })),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "App__card", count: count, color: color, shade: shade, shape: shape })));
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__pickers" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "App__pickers__picker", key: i },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
+                        const cards = [...this.state.cards];
+                        cards[i] = { shape, color, count, shade };
+                        this.setState({
+                            cards,
+                        });
+                    } }))))),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__cards" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "App__cards__card" }, card, { key: i }))))));
     }
 }
 
@@ -32855,8 +32857,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Card_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Card_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/MathUtils */ "./dist/shared/utils/MathUtils.ts");
-/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./dist/shared/utils/DOMUtils.ts");
+/* harmony import */ var _utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/MathUtils */ "./docs/shared/utils/MathUtils.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
 
 
 
@@ -32936,8 +32938,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ShapeGroup/ShapeGroup */ "./src/prod/client/components/ShapeGroup/ShapeGroup.tsx");
-/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./dist/shared/utils/Loop.ts");
-/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./dist/shared/utils/DOMUtils.ts");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
 /* harmony import */ var _components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/TextByWidth/TextByWidth */ "./src/prod/client/components/TextByWidth/TextByWidth.tsx");
 
 
@@ -32948,35 +32950,59 @@ __webpack_require__.r(__webpack_exports__);
 class CardPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
+        this.shapeChanged = (index) => {
+            const { onChange, color, count, shade } = this.props;
+            if (onChange)
+                onChange(index, color, count, shade);
+        };
+        this.colorChanged = (index) => {
+            const { onChange, count, shade, shape } = this.props;
+            if (onChange)
+                onChange(shape, index, count, shade);
+        };
+        this.countChanged = (index) => {
+            const { onChange, color, shade, shape } = this.props;
+            if (onChange)
+                onChange(shape, color, index, shade);
+        };
+        this.shadeChanged = (index) => {
+            const { onChange, color, count, shape } = this.props;
+            if (onChange)
+                onChange(shape, color, count, index);
+        };
         this.state = {};
     }
     render() {
-        const { shape, color, count, shade, onChange } = this.props;
-        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker" },
+        const { shape, color, count, shade, style } = this.props;
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: style },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "count")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => onChange(shape, color, i, shade), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === count }) },
+                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.countChanged(i), onTouchStart: () => this.countChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === count }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: i, color: color, shade: shade, shape: shape }))))),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "color")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => onChange(shape, i, count, shade), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === color }) },
+                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.colorChanged(i), onTouchStart: () => this.colorChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === color }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: i, shade: shade, shape: shape }))))),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "shade")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => onChange(shape, color, count, i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shade }) },
+                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.shadeChanged(i), onTouchStart: () => this.shadeChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shade }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: color, shade: i, shape: shape }))))),
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "shape")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => onChange(i, color, count, shade), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shape }) },
+                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.shapeChanged(i), onTouchStart: () => this.shapeChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shape }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: color, shade: shade, shape: i }))))));
+    }
+    getClassName() {
+        const { className } = this.props;
+        return "CardPicker" + (className ? " " + className : "");
     }
 }
 
@@ -33240,7 +33266,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Shape_Shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/Shape/Shape */ "./src/prod/client/components/Shape/Shape.tsx");
-/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./dist/shared/utils/Loop.ts");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
 /* harmony import */ var _client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @client/contexts/PrimaryContext */ "./src/prod/client/contexts/PrimaryContext.ts");
 
 

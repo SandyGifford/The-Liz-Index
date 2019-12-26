@@ -16,7 +16,7 @@ export interface CardPickerProps {
 	color: AttributeSelector;
 	count: AttributeSelector;
 	shade: AttributeSelector;
-	onChange: CardPickerChanged;
+	onChange?: CardPickerChanged;
 
 }
 export interface CardPickerState { }
@@ -96,22 +96,22 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 
 	private shapeChanged = (index: AttributeSelector) => {
 		const { onChange, color, count, shade } = this.props;
-		onChange(index, color, count, shade);
+		if (onChange) onChange(index, color, count, shade);
 	};
 
 	private colorChanged = (index: AttributeSelector) => {
 		const { onChange, count, shade, shape } = this.props;
-		onChange(shape, index, count, shade);
+		if (onChange) onChange(shape, index, count, shade);
 	};
 
 	private countChanged = (index: AttributeSelector) => {
 		const { onChange, color, shade, shape } = this.props;
-		onChange(shape, color, index, shade);
+		if (onChange) onChange(shape, color, index, shade);
 	};
 
 	private shadeChanged = (index: AttributeSelector) => {
 		const { onChange, color, count, shape } = this.props;
-		onChange(shape, color, count, index);
+		if (onChange) onChange(shape, color, count, index);
 	};
 
 }

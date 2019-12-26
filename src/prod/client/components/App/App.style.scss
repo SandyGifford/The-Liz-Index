@@ -1,8 +1,24 @@
 .App {
 	user-select: none;
-	display: flex;
 
-	&__card {
-		flex: 1 1 50%;
+	&__pickers {
+		display: flex;
+		width: 100%;
+
+		&__picker {
+			flex: 1 1 auto;
+			margin: 0 1%;
+		}
+	}
+
+	&__cards {
+		display: flex;
+		width: 75%;
+		margin: 2% auto 0 auto;
+
+		&__card {
+			flex: 1 1 auto;
+			margin: 0 2%;
+		}
 	}
 }

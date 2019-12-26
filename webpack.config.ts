@@ -22,7 +22,7 @@ const config: Configuration = {
 		dev: "./src/dev/client/dev.tsx"
 	},
 	output: {
-		path: path.resolve(__dirname, "dist/build"),
+		path: path.resolve(__dirname, "docs/build"),
 		filename: "[name].js",
 	},
 	module: {
