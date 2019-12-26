@@ -3,13 +3,20 @@ import "./SetPickerPage.style";
 import * as React from "react";
 import CardPicker, { CardPickerProps } from "@components/CardPicker/CardPicker";
 import Card from "@components/Card/Card";
-import { ShapeGroupProps } from "@components/ShapeGroup/ShapeGroup";
 import Loop from "@utils/Loop";
 import SetCard from "@components/SetCard/SetCard";
+import { AttributeSelector } from "@typings/general";
+
+interface SetDef {
+	shape: AttributeSelector;
+	color: AttributeSelector;
+	shade: AttributeSelector;
+	count: AttributeSelector;
+}
 
 export interface SetPickerPageProps { }
 export interface SetPickerPageState {
-	cards: [ShapeGroupProps, ShapeGroupProps, ShapeGroupProps];
+	cards: [SetDef, SetDef, SetDef];
 }
 
 export default class SetPickerPage extends React.PureComponent<SetPickerPageProps, SetPickerPageState> {

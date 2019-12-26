@@ -1,7 +1,8 @@
 .SetPickerPage {
 	&__pickers {
 		display: flex;
-		width: 100%;
+		width: 75%;
+		margin: 1% auto 0 auto;
 
 		&__picker {
 			flex: 1 1 auto;
@@ -11,7 +12,7 @@
 
 	&__cards {
 		display: flex;
-		width: 75%;
+		width: 50%;
 		margin: 2% auto 0 auto;
 
 		&__card {

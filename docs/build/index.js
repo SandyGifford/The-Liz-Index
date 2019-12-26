@@ -178,7 +178,7 @@ class MathUtils {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: magenta;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n}\n.App__toolbar {\n  grid-row: 1/3;\n  grid-column: 2/3;\n  background: orange;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n  background: cyan;\n}", ""]);
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: #334;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n}\n.App__toolbar {\n  grid-row: 1/2;\n  grid-column: 2/3;\n  background: #778;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -322,7 +322,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".SetPickerPage__pickers {\n  display: flex;\n  width: 100%;\n}\n.SetPickerPage__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.SetPickerPage__cards {\n  display: flex;\n  width: 75%;\n  margin: 2% auto 0 auto;\n}\n.SetPickerPage__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
+exports.push([module.i, ".SetPickerPage__pickers {\n  display: flex;\n  width: 75%;\n  margin: 1% auto 0 auto;\n}\n.SetPickerPage__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.SetPickerPage__cards {\n  display: flex;\n  width: 50%;\n  margin: 2% auto 0 auto;\n}\n.SetPickerPage__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
 // Exports
 module.exports = exports;
 
