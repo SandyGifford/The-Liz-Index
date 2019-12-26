@@ -178,7 +178,7 @@ class MathUtils {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".App {\n  user-select: none;\n}\n.App__pickers {\n  display: flex;\n  width: 100%;\n}\n.App__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.App__cards {\n  display: flex;\n  width: 75%;\n  margin: 2% auto 0 auto;\n}\n.App__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: magenta;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n}\n.App__toolbar {\n  grid-row: 1/3;\n  grid-column: 2/3;\n  background: orange;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n  background: cyan;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -305,6 +305,24 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_mo
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss ***!
+  \**************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".SetPickerPage__pickers {\n  display: flex;\n  width: 100%;\n}\n.SetPickerPage__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.SetPickerPage__cards {\n  display: flex;\n  width: 75%;\n  margin: 2% auto 0 auto;\n}\n.SetPickerPage__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -32771,40 +32789,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_App_style__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
-/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
-/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
-/* harmony import */ var _SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
-
-
-
+/* harmony import */ var _pages_SetPickerPage_SetPickerPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/SetPickerPage/SetPickerPage */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx");
 
 
 
 class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.state = {
-            cards: _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
-                shape: 0,
-                color: 0,
-                count: 0,
-                shade: 0,
-            })),
-        };
+        this.state = {};
     }
     render() {
-        const { cards } = this.state;
         return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__pickers" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "App__pickers__picker", key: i },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
-                        const cards = [...this.state.cards];
-                        cards[i] = { shape, color, count, shade };
-                        this.setState({
-                            cards,
-                        });
-                    } }))))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__cards" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "App__cards__card" }, card, { key: i }))))));
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarBackground" }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent" }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__toolbar" }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_pages_SetPickerPage_SetPickerPage__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
     }
 }
 
@@ -33368,6 +33368,92 @@ class TextByWidth extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     componentDidUpdate(prevProps) {
         if (prevProps.fraction !== this.props.fraction)
             this.recalculateFontSize();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss":
+/*!*********************************************************************************!*\
+  !*** ./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader/dist/cjs.js!../../../../../../node_modules/sass-loader/dist/cjs.js!./SetPickerPage.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../../node_modules/css-loader/dist/cjs.js!../../../../../../node_modules/sass-loader/dist/cjs.js!./SetPickerPage.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx":
+/*!**************************************************************************!*\
+  !*** ./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetPickerPage; });
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SetPickerPage.style */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
+/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
+
+
+
+
+
+
+class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cards: _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
+                shape: 0,
+                color: 0,
+                count: 0,
+                shade: 0,
+            })),
+        };
+    }
+    render() {
+        const { cards } = this.state;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage" },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage__pickers" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "SetPickerPage__pickers__picker", key: i },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
+                        const cards = [...this.state.cards];
+                        cards[i] = { shape, color, count, shade };
+                        this.setState({
+                            cards,
+                        });
+                    } }))))),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage__cards" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__cards__card" }, card, { key: i }))))));
     }
 }
 
