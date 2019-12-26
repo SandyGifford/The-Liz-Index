@@ -27,5 +27,6 @@ module.exports = {
 		"@typescript-eslint/indent": ["error", "tab"],
 		"@typescript-eslint/no-empty-interface": 0,
 		"@typescript-eslint/explicit-function-return-type": 0,
+		"@typescript-eslint/no-explicit-any": 0
 	}
 };

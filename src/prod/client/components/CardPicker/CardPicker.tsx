@@ -10,6 +10,8 @@ import TextByWidth from "@components/TextByWidth/TextByWidth";
 export type CardPickerChanged = (shape: AttributeSelector, color: AttributeSelector, count: AttributeSelector, shade: AttributeSelector) => void;
 
 export interface CardPickerProps {
+	style?: React.CSSProperties;
+	className?: string;
 	shape: AttributeSelector;
 	color: AttributeSelector;
 	count: AttributeSelector;
@@ -26,8 +28,8 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 	}
 
 	public render(): React.ReactNode {
-		const { shape, color, count, shade } = this.props;
-		return <div className="CardPicker">
+		const { shape, color, count, shade, style } = this.props;
+		return <div className={this.getClassName()} style={style}>
 			<div className="CardPicker__row">
 				<div className="CardPicker__row__label"><TextByWidth fraction={0.4}>count</TextByWidth></div>
 				{
@@ -85,6 +87,11 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 				}
 			</div>
 		</div>;
+	}
+
+	private getClassName(): string {
+		const { className } = this.props;
+		return "CardPicker" + (className ? " " + className : "");
 	}
 
 	private shapeChanged = (index: AttributeSelector) => {
