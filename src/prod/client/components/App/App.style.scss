@@ -29,6 +29,41 @@ body {
 
 	&__sidebarContent {
 		grid-row: 2 / 3;
+		color: white;
+
+		&__item {
+			text-align: right;
+			padding: 10px 20px;
+			cursor: pointer;
+
+			&__label {
+				font-size: 20px;
+			}
+			&__sub {
+				font-size: 10px;
+				color: #889;
+			}
+
+			&--disabled {
+				opacity: 0.25;
+				pointer-events: none;
+			}
+
+			&--selected {
+				&::before {
+					content: ">";
+					float: left;
+				}
+			}
+
+			&:hover {
+				background: #445;
+			}
+
+			&:active {
+				background: #223;
+			}
+		}
 	}
 
 	&__toolbar {
