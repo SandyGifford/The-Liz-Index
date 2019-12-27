@@ -178,7 +178,7 @@ class MathUtils {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: #334;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n}\n.App__toolbar {\n  grid-row: 1/2;\n  grid-column: 2/3;\n  background: #778;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n}", ""]);
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n  font-family: sans-serif;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: #334;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n}\n.App__toolbar {\n  grid-row: 1/2;\n  grid-column: 2/3;\n  background: #778;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n  position: relative;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -250,7 +250,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".Card {\n  position: relative;\n  border-radius: 15% / 10%;\n  background: #EEE;\n  flex: 1 1 auto;\n  width: 100px;\n}\n.Card::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: 2%;\n  left: 3%;\n  right: 3%;\n  bottom: 2%;\n  border-radius: 13.5% / 9%;\n  background: #FEFEFE;\n}\n.Card::after {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 0;\n  padding-bottom: 150%;\n  box-sizing: border-box;\n}\n.Card--animated {\n  transition: box-shadow 0.2s, transform 0.2s;\n}\n.Card__shapes {\n  width: 100%;\n  position: absolute;\n  padding: 0 5%;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}", ""]);
+exports.push([module.i, "", ""]);
 // Exports
 module.exports = exports;
 
@@ -322,7 +322,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".SetPickerPage__pickers {\n  display: flex;\n  width: 75%;\n  margin: 1% auto 0 auto;\n}\n.SetPickerPage__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 1%;\n}\n.SetPickerPage__cards {\n  display: flex;\n  width: 50%;\n  margin: 2% auto 0 auto;\n}\n.SetPickerPage__cards__card {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}", ""]);
+exports.push([module.i, ".SetPickerPage {\n  display: flex;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.SetPickerPage__main {\n  flex: 1 1 auto;\n  position: relative;\n}\n.SetPickerPage__main__content {\n  max-width: 820px;\n  width: 100%;\n  padding: 50px;\n  box-sizing: border-box;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.SetPickerPage__main__content__pickers {\n  display: flex;\n}\n.SetPickerPage__main__content__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}\n.SetPickerPage__main__content__cards {\n  display: flex;\n  margin: 10px auto 0 auto;\n  justify-content: center;\n}\n.SetPickerPage__main__content__cards__card {\n  flex: 0 0 auto;\n  width: 15%;\n  margin: 0 2%;\n}\n.SetPickerPage__history {\n  flex: 0 0 auto;\n  width: 200px;\n  background: #F3F3F3;\n  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.25);\n}\n.SetPickerPage__history__submit {\n  font-size: 20px;\n  text-align: center;\n  background: #334;\n  color: white;\n  padding: 5px 0;\n  cursor: pointer;\n}\n.SetPickerPage__history__submit:hover {\n  background: #445;\n}\n.SetPickerPage__history__submit:active {\n  background: #223;\n}\n.SetPickerPage__history__set {\n  overflow: hidden;\n  position: relative;\n  display: flex;\n  justify-content: flex-end;\n}\n.SetPickerPage__history__set__cards {\n  flex: 0 0 auto;\n  width: 100%;\n  display: flex;\n  transform: translateX(50px);\n  background: #EEE;\n  transition: transform 0.5s;\n}\n.SetPickerPage__history__set__cards__card {\n  flex: 1 1 auto;\n  margin: 5px;\n}\n.SetPickerPage__history__set:hover .SetPickerPage__history__set__cards {\n  transform: translateX(0);\n}\n.SetPickerPage__history__set__delete {\n  flex: 0 0 auto;\n  width: 50px;\n  background: red;\n  color: white;\n  text-align: center;\n  font-size: 50px;\n  line-height: 1.7;\n  cursor: pointer;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -33416,44 +33416,70 @@ module.exports = exported;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetPickerPage; });
-/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SetPickerPage.style */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
-/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_SetPickerPage_style__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
-/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SetPickerPage.style */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
 /* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
 /* harmony import */ var _components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
+// we need the card styles to load before
+// the page styles so we can override them
 
 
 
 
 
 
-class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] {
     constructor(props) {
         super(props);
+        this.submitToHistory = () => {
+            const { history, currentSet } = this.state;
+            this.setState({
+                history: [...history, currentSet],
+                currentSet: this.getBasicSet(),
+            });
+        };
         this.state = {
-            cards: _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
-                shape: 0,
-                color: 0,
-                count: 0,
-                shade: 0,
-            })),
+            currentSet: this.getBasicSet(),
+            history: [],
         };
     }
     render() {
-        const { cards } = this.state;
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage" },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage__pickers" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "SetPickerPage__pickers__picker", key: i },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
-                        const cards = [...this.state.cards];
-                        cards[i] = { shape, color, count, shade };
-                        this.setState({
-                            cards,
-                        });
-                    } }))))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "SetPickerPage__cards" }, cards.map((card, i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__cards__card" }, card, { key: i }))))));
+        const { currentSet, history } = this.state;
+        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage" },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main" },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content" },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__pickers" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_0__["default"], { className: "SetPickerPage__main__content__pickers__picker", key: i },
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
+                                const cards = [...this.state.currentSet];
+                                cards[i] = { shape, color, count, shade };
+                                this.setState({
+                                    currentSet: cards,
+                                });
+                            } }))))),
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__cards" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__main__content__cards__card" }, card, { key: i })))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history" },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__submit", onClick: this.submitToHistory }, "\u2B95 add set"),
+                history.map((set, s) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set", key: s },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set__cards" }, set.map((card, c) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__history__set__cards__card" }, card, { key: c })))),
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set__delete", onClick: () => {
+                            const history = [...this.state.history];
+                            history.splice(s, 1);
+                            this.setState({
+                                history,
+                            });
+                        } }, "\u00D7"))))));
+    }
+    getBasicSet(i = 0) {
+        return _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
+            shape: i,
+            color: i,
+            count: i,
+            shade: i,
+        }));
     }
 }
 
