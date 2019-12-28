@@ -31,7 +31,6 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 		const invalidCards = this.props.invalidCards || {};
 
 		return <div className={this.getClassName()} style={style}>
-
 			{
 				["color", "shade", "shape", "count"].map((trait: Traits) => <div className="CardPicker__row" key={trait}>
 					<div className="CardPicker__row__label"><TextByWidth fraction={0.4}>{trait}</TextByWidth></div>
