@@ -167,6 +167,63 @@ class MathUtils {
 
 /***/ }),
 
+/***/ "./docs/shared/utils/SetUtils.ts":
+/*!***************************************!*\
+  !*** ./docs/shared/utils/SetUtils.ts ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetUtils; });
+// lookup order: shape, color, shade, count
+class SetUtils {
+    static cardInLookup(card, lookup) {
+        const { shape, color, shade, count } = card;
+        if (!lookup)
+            return false;
+        if (!lookup[shape])
+            return false;
+        if (!lookup[shape][color])
+            return false;
+        if (!lookup[shape][color][shade])
+            return false;
+        if (!lookup[shape][color][shade][count])
+            return false;
+        return true;
+    }
+    static addCardToLookup(card, lookup) {
+        const { shape, color, shade, count } = card;
+        if (!lookup[shape])
+            lookup[shape] = {};
+        if (!lookup[shape][color])
+            lookup[shape][color] = {};
+        if (!lookup[shape][color][shade])
+            lookup[shape][color][shade] = {};
+        lookup[shape][color][shade][count] = true;
+    }
+    static removeCardFromLookup(card, lookup) {
+        const { shape, color, shade, count } = card;
+        if (!lookup[shape])
+            return;
+        if (!lookup[shape][color])
+            return;
+        if (!lookup[shape][color][shade])
+            return;
+        delete lookup[shape][color][shade][count];
+        if (!Object.keys(lookup[shape][color][shade]).length)
+            delete lookup[shape][color][shade];
+        if (!Object.keys(lookup[shape][color]).length)
+            delete lookup[shape][color];
+        if (!Object.keys(lookup[shape]).length)
+            delete lookup[shape];
+    }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/App/App.style.scss":
 /*!************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/App/App.style.scss ***!
@@ -32955,6 +33012,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
 /* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
 /* harmony import */ var _components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/TextByWidth/TextByWidth */ "./src/prod/client/components/TextByWidth/TextByWidth.tsx");
+/* harmony import */ var _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @utils/SetUtils */ "./docs/shared/utils/SetUtils.ts");
+
 
 
 
@@ -32964,55 +33023,28 @@ __webpack_require__.r(__webpack_exports__);
 class CardPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.shapeChanged = (index) => {
-            const { onChange, color, count, shade } = this.props;
+        this.change = (card) => {
+            const { onChange } = this.props;
             if (onChange)
-                onChange(index, color, count, shade);
-        };
-        this.colorChanged = (index) => {
-            const { onChange, count, shade, shape } = this.props;
-            if (onChange)
-                onChange(shape, index, count, shade);
-        };
-        this.countChanged = (index) => {
-            const { onChange, color, shade, shape } = this.props;
-            if (onChange)
-                onChange(shape, color, index, shade);
-        };
-        this.shadeChanged = (index) => {
-            const { onChange, color, count, shape } = this.props;
-            if (onChange)
-                onChange(shape, color, count, index);
+                onChange(card);
         };
         this.state = {};
     }
     render() {
-        const { shape, color, count, shade, style } = this.props;
-        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: style },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "count")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.countChanged(i), onTouchStart: () => this.countChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === count }) },
+        const { card, style } = this.props;
+        const invalidCards = this.props.invalidCards || {};
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: style }, ["color", "shade", "shape", "count"].map((trait) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row", key: trait },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, trait)),
+            _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => {
+                const opCard = { ...card, [trait]: i };
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.change(opCard), onTouchStart: () => this.change(opCard), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", {
+                        selected: card[trait] === i,
+                        invalid: _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].cardInLookup(opCard, invalidCards),
+                    }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: i, color: color, shade: shade, shape: shape }))))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "color")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.colorChanged(i), onTouchStart: () => this.colorChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === color }) },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: i, shade: shade, shape: shape }))))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "shade")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.shadeChanged(i), onTouchStart: () => this.shadeChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shade }) },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: color, shade: i, shape: shape }))))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row" },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, "shape")),
-                _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.shapeChanged(i), onTouchStart: () => this.shapeChanged(i), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", { selected: i === shape }) },
-                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
-                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { count: count, color: color, shade: shade, shape: i }))))));
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, opCard))));
+            }))));
     }
     getClassName() {
         const { className } = this.props;
@@ -33467,13 +33499,13 @@ class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] 
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main" },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content" },
                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__pickers" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_0__["default"], { className: "SetPickerPage__main__content__pickers__picker", key: i },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({}, card, { onChange: (shape, color, count, shade) => {
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], { card: card, onChange: (newCard) => {
                                 const cards = [...this.state.currentSet];
-                                cards[i] = { shape, color, count, shade };
+                                cards[i] = newCard;
                                 this.setState({
                                     currentSet: cards,
                                 });
-                            } }))))),
+                            } })))),
                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__cards" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__main__content__cards__card" }, card, { key: i })))))),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history" },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__submit", onClick: this.submitToHistory }, "\u2B95 add set"),

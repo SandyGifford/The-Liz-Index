@@ -4,19 +4,10 @@ import Card from "@components/Card/Card";
 import "./SetPickerPage.style";
 
 import * as React from "react";
-import CardPicker, { CardPickerProps } from "@components/CardPicker/CardPicker";
+import CardPicker from "@components/CardPicker/CardPicker";
 import Loop from "@utils/Loop";
 import SetCard from "@components/SetCard/SetCard";
-import { AttributeSelector } from "@typings/general";
-
-interface CardDef {
-	shape: AttributeSelector;
-	color: AttributeSelector;
-	shade: AttributeSelector;
-	count: AttributeSelector;
-}
-
-type SetDef = [CardDef, CardDef, CardDef];
+import { SetDef, CardDef } from "@typings/general";
 
 export interface SetPickerPageProps { }
 export interface SetPickerPageState {
@@ -41,10 +32,10 @@ export default class SetPickerPage extends React.PureComponent<SetPickerPageProp
 				<div className="SetPickerPage__main">
 					<div className="SetPickerPage__main__content">
 						<div className="SetPickerPage__main__content__pickers">{
-							currentSet.map((card: CardPickerProps, i) => <Card className="SetPickerPage__main__content__pickers__picker" key={i}>
-								<CardPicker {...card} onChange={(shape, color, count, shade) => {
-									const cards = [...this.state.currentSet] as [CardPickerProps, CardPickerProps, CardPickerProps];
-									cards[i] = { shape, color, count, shade };
+							currentSet.map((card: CardDef, i) => <Card className="SetPickerPage__main__content__pickers__picker" key={i}>
+								<CardPicker card={card} onChange={(newCard) => {
+									const cards = [...this.state.currentSet] as SetDef;
+									cards[i] = newCard;
 
 									this.setState({
 										currentSet: cards,
@@ -53,7 +44,7 @@ export default class SetPickerPage extends React.PureComponent<SetPickerPageProp
 							</Card>)
 						}</div>
 						<div className="SetPickerPage__main__content__cards">{
-							currentSet.map((card: CardPickerProps, i) => <SetCard className="SetPickerPage__main__content__cards__card" {...card} key={i} />)
+							currentSet.map((card: CardDef, i) => <SetCard className="SetPickerPage__main__content__cards__card" {...card} key={i} />)
 						}</div>
 					</div>
 				</div>
