@@ -179,45 +179,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetUtils; });
 // lookup order: shape, color, shade, count
 class SetUtils {
-    static cardInLookup(card, lookup) {
+    static countInLookup(card, lookup) {
         const { shape, color, shade, count } = card;
         if (!lookup)
-            return false;
+            return 0;
         if (!lookup[shape])
-            return false;
+            return 0;
         if (!lookup[shape][color])
-            return false;
+            return 0;
         if (!lookup[shape][color][shade])
-            return false;
+            return 0;
         if (!lookup[shape][color][shade][count])
-            return false;
-        return true;
+            return 0;
+        return lookup[shape][color][shade][count];
     }
-    static addCardToLookup(card, lookup) {
-        const { shape, color, shade, count } = card;
-        if (!lookup[shape])
-            lookup[shape] = {};
-        if (!lookup[shape][color])
-            lookup[shape][color] = {};
-        if (!lookup[shape][color][shade])
-            lookup[shape][color][shade] = {};
-        lookup[shape][color][shade][count] = true;
+    static addCardToLookup(cards, lookup = {}) {
+        cards = Array.isArray(cards) ? cards : [cards];
+        cards.forEach(card => {
+            const { shape, color, shade, count } = card;
+            if (!lookup[shape])
+                lookup[shape] = {};
+            if (!lookup[shape][color])
+                lookup[shape][color] = {};
+            if (!lookup[shape][color][shade])
+                lookup[shape][color][shade] = {};
+            if (!lookup[shape][color][shade][count])
+                lookup[shape][color][shade][count] = 0;
+            lookup[shape][color][shade][count]++;
+        });
+        return lookup;
     }
-    static removeCardFromLookup(card, lookup) {
-        const { shape, color, shade, count } = card;
-        if (!lookup[shape])
-            return;
-        if (!lookup[shape][color])
-            return;
-        if (!lookup[shape][color][shade])
-            return;
-        delete lookup[shape][color][shade][count];
-        if (!Object.keys(lookup[shape][color][shade]).length)
-            delete lookup[shape][color][shade];
-        if (!Object.keys(lookup[shape][color]).length)
-            delete lookup[shape][color];
-        if (!Object.keys(lookup[shape]).length)
-            delete lookup[shape];
+    static removeCardFromLookup(cards, lookup = {}) {
+        cards = Array.isArray(cards) ? cards : [cards];
+        cards.forEach(card => {
+            const { shape, color, shade, count } = card;
+            if (!lookup[shape])
+                return;
+            if (!lookup[shape][color])
+                return;
+            if (!lookup[shape][color][shade])
+                return;
+            delete lookup[shape][color][shade][count];
+            if (!Object.keys(lookup[shape][color][shade]).length)
+                delete lookup[shape][color][shade];
+            if (!Object.keys(lookup[shape][color]).length)
+                delete lookup[shape][color];
+            if (!Object.keys(lookup[shape]).length)
+                delete lookup[shape];
+        });
+        return lookup;
     }
 }
 
@@ -271,7 +281,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".CardPicker__row {\n  display: flex;\n}\n.CardPicker__row__label {\n  flex: 0 0 10%;\n  width: 10%;\n  writing-mode: tb;\n  text-orientation: upright;\n  display: flex;\n  justify-content: center;\n  font-family: futura, sans-serif;\n}\n.CardPicker__row__option {\n  flex: 1 1 auto;\n  position: relative;\n  background: #eaeaff;\n  margin: 1%;\n  border-radius: 10%;\n  cursor: pointer;\n}\n.CardPicker__row__option::before {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 0;\n  padding-bottom: 100%;\n  box-sizing: border-box;\n}\n.CardPicker__row__option--selected::after {\n  content: \"\";\n  border-radius: 10%;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  border: double #7575d4 5px;\n  pointer-events: none;\n}\n.CardPicker__row__option__content {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}", ""]);
+exports.push([module.i, ".CardPicker__row {\n  display: flex;\n}\n.CardPicker__row__label {\n  flex: 0 0 10%;\n  width: 10%;\n  writing-mode: tb;\n  text-orientation: upright;\n  display: flex;\n  justify-content: center;\n  font-family: futura, sans-serif;\n}\n.CardPicker__row__option {\n  flex: 1 1 auto;\n  position: relative;\n  background: #eaeaff;\n  margin: 1%;\n  border-radius: 10%;\n  cursor: pointer;\n}\n.CardPicker__row__option::before {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 0;\n  padding-bottom: 100%;\n  box-sizing: border-box;\n}\n.CardPicker__row__option--selected::after {\n  content: \"\";\n  border-radius: 10%;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  border: double #7575d4 5px;\n  pointer-events: none;\n}\n.CardPicker__row__option--invalid {\n  background: #e08383;\n}\n.CardPicker__row__option__content {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -33031,8 +33041,7 @@ class CardPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
         this.state = {};
     }
     render() {
-        const { card, style } = this.props;
-        const invalidCards = this.props.invalidCards || {};
+        const { card, style, invalidCards } = this.props;
         return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: style }, ["color", "shade", "shape", "count"].map((trait) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row", key: trait },
             react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
                 react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, trait)),
@@ -33040,7 +33049,7 @@ class CardPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
                 const opCard = { ...card, [trait]: i };
                 return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.change(opCard), onTouchStart: () => this.change(opCard), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", {
                         selected: card[trait] === i,
-                        invalid: _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].cardInLookup(opCard, invalidCards),
+                        invalid: _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].countInLookup(opCard, invalidCards) !== 0,
                     }) },
                     react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
                         react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, opCard))));
@@ -33470,8 +33479,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
 /* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
 /* harmony import */ var _components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
+/* harmony import */ var _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @utils/SetUtils */ "./docs/shared/utils/SetUtils.ts");
 // we need the card styles to load before
 // the page styles so we can override them
+
 
 
 
@@ -33491,15 +33502,17 @@ class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] 
         this.state = {
             currentSet: this.getBasicSet(),
             history: [],
+            historyLookup: {},
         };
     }
     render() {
-        const { currentSet, history } = this.state;
+        const { currentSet, history, historyLookup } = this.state;
+        const invalidCards = _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].addCardToLookup(currentSet, historyLookup);
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage" },
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main" },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content" },
                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__pickers" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_0__["default"], { className: "SetPickerPage__main__content__pickers__picker", key: i },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], { card: card, onChange: (newCard) => {
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], { invalidCards: invalidCards, card: card, onChange: (newCard) => {
                                 const cards = [...this.state.currentSet];
                                 cards[i] = newCard;
                                 this.setState({

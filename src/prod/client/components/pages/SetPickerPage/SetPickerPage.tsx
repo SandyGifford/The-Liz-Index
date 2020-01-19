@@ -7,12 +7,14 @@ import * as React from "react";
 import CardPicker from "@components/CardPicker/CardPicker";
 import Loop from "@utils/Loop";
 import SetCard from "@components/SetCard/SetCard";
-import { SetDef, CardDef } from "@typings/general";
+import { SetDef, CardDef, QuickCardsLookup } from "@typings/general";
+import SetUtils from "@utils/SetUtils";
 
 export interface SetPickerPageProps { }
 export interface SetPickerPageState {
 	currentSet: SetDef;
 	history: SetDef[];
+	historyLookup: QuickCardsLookup;
 }
 
 export default class SetPickerPage extends React.PureComponent<SetPickerPageProps, SetPickerPageState> {
@@ -21,11 +23,13 @@ export default class SetPickerPage extends React.PureComponent<SetPickerPageProp
 		this.state = {
 			currentSet: this.getBasicSet(),
 			history: [],
+			historyLookup: {},
 		};
 	}
 
 	public render(): React.ReactNode {
-		const { currentSet, history } = this.state;
+		const { currentSet, history, historyLookup } = this.state;
+		const invalidCards = SetUtils.addCardToLookup(currentSet, historyLookup);
 
 		return (
 			<div className="SetPickerPage">
@@ -33,14 +37,17 @@ export default class SetPickerPage extends React.PureComponent<SetPickerPageProp
 					<div className="SetPickerPage__main__content">
 						<div className="SetPickerPage__main__content__pickers">{
 							currentSet.map((card: CardDef, i) => <Card className="SetPickerPage__main__content__pickers__picker" key={i}>
-								<CardPicker card={card} onChange={(newCard) => {
-									const cards = [...this.state.currentSet] as SetDef;
-									cards[i] = newCard;
+								<CardPicker
+									invalidCards={invalidCards}
+									card={card}
+									onChange={(newCard) => {
+										const cards = [...this.state.currentSet] as SetDef;
+										cards[i] = newCard;
 
-									this.setState({
-										currentSet: cards,
-									});
-								}} />
+										this.setState({
+											currentSet: cards,
+										});
+									}} />
 							</Card>)
 						}</div>
 						<div className="SetPickerPage__main__content__cards">{

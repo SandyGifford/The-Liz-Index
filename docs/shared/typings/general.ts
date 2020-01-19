@@ -19,7 +19,7 @@ export type QuickCardsLookup = Partial<{
 	[shape in AttributeSelector]: Partial<{
 		[color in AttributeSelector]: Partial<{
 			[shade in AttributeSelector]: Partial<{
-				[count in AttributeSelector]: boolean
+				[count in AttributeSelector]: number
 			}>
 		}>
 	}>

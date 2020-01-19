@@ -27,8 +27,7 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 	}
 
 	public render(): React.ReactNode {
-		const { card, style } = this.props;
-		const invalidCards = this.props.invalidCards || {};
+		const { card, style, invalidCards } = this.props;
 
 		return <div className={this.getClassName()} style={style}>
 			{
@@ -43,7 +42,7 @@ export default class CardPicker extends React.PureComponent<CardPickerProps, Car
 							onTouchStart={() => this.change(opCard)}
 							className={DOMUtils.getBEMClassName("CardPicker__row__option", {
 								selected: card[trait] === i,
-								invalid: SetUtils.cardInLookup(opCard, invalidCards),
+								invalid: SetUtils.countInLookup(opCard, invalidCards) !== 0,
 							})}>
 							<div className="CardPicker__row__option__content">
 								<ShapeGroup {...opCard} />

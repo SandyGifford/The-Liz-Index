@@ -44,6 +44,10 @@
 				}
 			}
 
+			&--invalid {
+				background: rgb(224, 131, 131);
+			}
+
 			&__content {
 				position: absolute;
 				top: 0;

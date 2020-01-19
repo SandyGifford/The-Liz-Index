@@ -16,7 +16,7 @@ export default (server: Server, buildComplete = () => { }) => {
 		io.emit("buildSuccess");
 	}
 
-	io.on("connection", (socket) => {
+	io.on("connection", socket => {
 		console.log("a user connected");
 
 		if (lastFail) sendFail();
