@@ -86,6 +86,154 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./docs/shared/utils/DOMUtils.ts":
+/*!***************************************!*\
+  !*** ./docs/shared/utils/DOMUtils.ts ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DOMUtils; });
+/* harmony import */ var _Loop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loop */ "./docs/shared/utils/Loop.ts");
+
+class DOMUtils {
+    static getBEMClassName(baseName, modifiers) {
+        return baseName + _Loop__WEBPACK_IMPORTED_MODULE_0__["default"].objectMap(modifiers, (mod, isTrue, index, obj, skip) => {
+            if (!isTrue)
+                skip();
+            return ` ${baseName}--${mod}`;
+        }).join("");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./docs/shared/utils/Loop.ts":
+/*!***********************************!*\
+  !*** ./docs/shared/utils/Loop.ts ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Loop; });
+class Loop {
+    static mapTimes(times, action) {
+        const arr = [];
+        for (let i = 0; i < times; i++)
+            arr.push(action(i));
+        return arr;
+    }
+    static objectForEach(obj, act) {
+        Object.keys(obj).forEach((key, index) => act(key, obj[key], index, obj));
+    }
+    static objectMap(obj, act) {
+        const arr = [];
+        this.objectForEach(obj, (key, value, index) => {
+            let skipped = false;
+            const skip = () => skipped = true;
+            const res = act(key, value, index, obj, skip);
+            if (skipped)
+                return;
+            arr.push(res);
+        });
+        return arr;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./docs/shared/utils/MathUtils.ts":
+/*!****************************************!*\
+  !*** ./docs/shared/utils/MathUtils.ts ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MathUtils; });
+class MathUtils {
+    static clamp(num, min, max) {
+        return Math.max(min, Math.min(num, max));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./docs/shared/utils/SetUtils.ts":
+/*!***************************************!*\
+  !*** ./docs/shared/utils/SetUtils.ts ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetUtils; });
+// lookup order: shape, color, shade, count
+class SetUtils {
+    static countInLookup(card, lookup) {
+        const { shape, color, shade, count } = card;
+        if (!lookup)
+            return 0;
+        if (!lookup[shape])
+            return 0;
+        if (!lookup[shape][color])
+            return 0;
+        if (!lookup[shape][color][shade])
+            return 0;
+        if (!lookup[shape][color][shade][count])
+            return 0;
+        return lookup[shape][color][shade][count];
+    }
+    static addCardToLookup(cards, lookup = {}) {
+        cards = Array.isArray(cards) ? cards : [cards];
+        cards.forEach(card => {
+            const { shape, color, shade, count } = card;
+            if (!lookup[shape])
+                lookup[shape] = {};
+            if (!lookup[shape][color])
+                lookup[shape][color] = {};
+            if (!lookup[shape][color][shade])
+                lookup[shape][color][shade] = {};
+            if (!lookup[shape][color][shade][count])
+                lookup[shape][color][shade][count] = 0;
+            lookup[shape][color][shade][count]++;
+        });
+        return lookup;
+    }
+    static removeCardFromLookup(cards, lookup = {}) {
+        cards = Array.isArray(cards) ? cards : [cards];
+        cards.forEach(card => {
+            const { shape, color, shade, count } = card;
+            if (!lookup[shape])
+                return;
+            if (!lookup[shape][color])
+                return;
+            if (!lookup[shape][color][shade])
+                return;
+            delete lookup[shape][color][shade][count];
+            if (!Object.keys(lookup[shape][color][shade]).length)
+                delete lookup[shape][color][shade];
+            if (!Object.keys(lookup[shape][color]).length)
+                delete lookup[shape][color];
+            if (!Object.keys(lookup[shape]).length)
+                delete lookup[shape];
+        });
+        return lookup;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/after/index.js":
 /*!*************************************!*\
   !*** ./node_modules/after/index.js ***!
@@ -2671,6 +2819,168 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_mo
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".DevApp__app {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n  outline: none;\n}\n.DevApp__errors {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.9);\n  font-family: monospace;\n  white-space: pre-wrap;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/App/App.style.scss":
+/*!************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/App/App.style.scss ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n\n.App {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  user-select: none;\n  grid-template-columns: 200px auto;\n  grid-template-rows: 32px auto;\n  font-family: sans-serif;\n}\n.App__sidebarBackground, .App__sidebarContent {\n  grid-column: 1/2;\n}\n.App__sidebarBackground {\n  grid-row: 1/3;\n  background: #334;\n}\n.App__sidebarContent {\n  grid-row: 2/3;\n  color: white;\n}\n.App__sidebarContent__item {\n  text-align: right;\n  padding: 10px 20px;\n  cursor: pointer;\n}\n.App__sidebarContent__item__label {\n  font-size: 20px;\n}\n.App__sidebarContent__item__sub {\n  font-size: 10px;\n  color: #889;\n}\n.App__sidebarContent__item--disabled {\n  opacity: 0.25;\n  pointer-events: none;\n}\n.App__sidebarContent__item--selected::before {\n  content: \">\";\n  float: left;\n}\n.App__sidebarContent__item:hover {\n  background: #445;\n}\n.App__sidebarContent__item:active {\n  background: #223;\n}\n.App__toolbar {\n  grid-row: 1/2;\n  grid-column: 2/3;\n  background: #778;\n}\n.App__content {\n  grid-row: 2/3;\n  grid-column: 2/3;\n  position: relative;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Card/Card.style.scss":
+/*!**************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Card/Card.style.scss ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".Card {\n  position: relative;\n  border-radius: 15% / 10%;\n  background: #EEE;\n  flex: 1 1 auto;\n  width: 100px;\n}\n.Card::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: 2%;\n  left: 3%;\n  right: 3%;\n  bottom: 2%;\n  border-radius: 13.5% / 9%;\n  background: #FEFEFE;\n}\n.Card::after {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 0;\n  padding-bottom: 150%;\n  box-sizing: border-box;\n}\n.Card--animated {\n  transition: box-shadow 0.2s, transform 0.2s;\n}\n.Card__content {\n  width: 100%;\n  position: absolute;\n  box-sizing: border-box;\n  padding: 5%;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/CardPicker/CardPicker.style.scss":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/CardPicker/CardPicker.style.scss ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".CardPicker__row {\n  display: flex;\n}\n.CardPicker__row__label {\n  flex: 0 0 10%;\n  width: 10%;\n  writing-mode: tb;\n  text-orientation: upright;\n  display: flex;\n  justify-content: center;\n  font-family: futura, sans-serif;\n}\n.CardPicker__row__option {\n  flex: 1 1 auto;\n  position: relative;\n  background: #eaeaff;\n  margin: 1%;\n  border-radius: 10%;\n  cursor: pointer;\n}\n.CardPicker__row__option::before {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 0;\n  padding-bottom: 100%;\n  box-sizing: border-box;\n}\n.CardPicker__row__option--selected::after {\n  content: \"\";\n  border-radius: 10%;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  border: double #7575d4 5px;\n  pointer-events: none;\n}\n.CardPicker__row__option--invalid {\n  background: #e08383;\n}\n.CardPicker__row__option__content {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/JsonSvg/JsonSvg.style.scss":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/JsonSvg/JsonSvg.style.scss ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/SetCard/SetCard.style.scss":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/SetCard/SetCard.style.scss ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Shape/Shape.style.scss":
+/*!****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Shape/Shape.style.scss ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".Shape {\n  flex: 1 1 auto;\n}\n.Shape__defs, .Shape__path {\n  stroke: currentColor;\n}\n.Shape__defs {\n  fill: currentColor;\n}\n.Shape__path {\n  stroke-width: 5%;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".ShapeGroup {\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  align-items: center;\n  justify-content: center;\n}\n.ShapeGroup__shape {\n  flex: 0 0 auto;\n  display: flex;\n  box-sizing: border-box;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/TextByWidth/TextByWidth.style.scss":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/TextByWidth/TextByWidth.style.scss ***!
+  \****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss ***!
+  \**************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".SetPickerPage {\n  display: flex;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.SetPickerPage__main {\n  flex: 1 1 auto;\n  position: relative;\n}\n.SetPickerPage__main__content {\n  max-width: 820px;\n  width: 100%;\n  padding: 50px;\n  box-sizing: border-box;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.SetPickerPage__main__content__pickers {\n  display: flex;\n}\n.SetPickerPage__main__content__pickers__picker {\n  flex: 1 1 auto;\n  margin: 0 2%;\n}\n.SetPickerPage__main__content__cards {\n  display: flex;\n  margin: 10px auto 0 auto;\n  justify-content: center;\n}\n.SetPickerPage__main__content__cards__card {\n  flex: 0 0 auto;\n  width: 15%;\n  margin: 0 2%;\n}\n.SetPickerPage__history {\n  flex: 0 0 auto;\n  width: 200px;\n  background: #F3F3F3;\n  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.25);\n}\n.SetPickerPage__history__submit {\n  font-size: 20px;\n  text-align: center;\n  background: #334;\n  color: white;\n  padding: 5px 0;\n  cursor: pointer;\n}\n.SetPickerPage__history__submit:hover {\n  background: #445;\n}\n.SetPickerPage__history__submit:active {\n  background: #223;\n}\n.SetPickerPage__history__set {\n  overflow: hidden;\n  position: relative;\n  display: flex;\n  justify-content: flex-end;\n  border-bottom: 1px solid #CCC;\n}\n.SetPickerPage__history__set__cards {\n  flex: 0 0 auto;\n  width: 100%;\n  display: flex;\n  transform: translateX(50px);\n  background: #EEE;\n  transition: transform 0.5s;\n}\n.SetPickerPage__history__set__cards__card {\n  flex: 1 1 auto;\n  margin: 5px;\n}\n.SetPickerPage__history__set:hover .SetPickerPage__history__set__cards {\n  transform: translateX(0);\n}\n.SetPickerPage__history__set__delete {\n  flex: 0 0 auto;\n  width: 50px;\n  background: red;\n  color: white;\n  text-align: center;\n  font-size: 50px;\n  line-height: 1.7;\n  cursor: pointer;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -41790,6 +42100,265 @@ function toArray(list, index) {
 
 /***/ }),
 
+/***/ "./node_modules/uuid/index.js":
+/*!************************************!*\
+  !*** ./node_modules/uuid/index.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var v1 = __webpack_require__(/*! ./v1 */ "./node_modules/uuid/v1.js");
+var v4 = __webpack_require__(/*! ./v4 */ "./node_modules/uuid/v4.js");
+
+var uuid = v4;
+uuid.v1 = v1;
+uuid.v4 = v4;
+
+module.exports = uuid;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/bytesToUuid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/bytesToUuid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/rng-browser.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/rng-browser.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v1.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v1.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
+var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+var _nodeId;
+var _clockseq;
+
+// Previous uuid creation time
+var _lastMSecs = 0;
+var _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+  var node = options.node || _nodeId;
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+  if (node == null || clockseq == null) {
+    var seedBytes = rng();
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [
+        seedBytes[0] | 0x01,
+        seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]
+      ];
+    }
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  }
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : bytesToUuid(b);
+}
+
+module.exports = v1;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v4.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v4.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
+var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+module.exports = v4;
+
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -42060,7 +42629,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _devComponents_AnsiText_AnsiText__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @devComponents/AnsiText/AnsiText */ "./src/dev/client/components/AnsiText/AnsiText.tsx");
+/* harmony import */ var _components_App_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/App/App */ "./src/prod/client/components/App/App.tsx");
+/* harmony import */ var _devComponents_AnsiText_AnsiText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @devComponents/AnsiText/AnsiText */ "./src/dev/client/components/AnsiText/AnsiText.tsx");
+
 
 
 
@@ -42068,34 +42639,37 @@ __webpack_require__.r(__webpack_exports__);
 class DevApp extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] {
     constructor(props) {
         super(props);
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default()();
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default()({
+            port: "3001",
+        });
         this.buildSuccess = () => {
+            console.log("buildSuccess");
             this.setState({
                 errors: [],
             });
-            this.incrementBuild();
+            this.reloadPage();
         };
         this.buildFail = (errors) => {
+            console.log("buildFail");
             this.setState({
                 errors,
             });
-            this.incrementBuild();
+            this.reloadPage();
         };
-        this.incrementBuild = () => {
-            this.setState({
-                buildCount: this.state.buildCount + 1
-            });
+        this.reloadPage = () => {
+            window.location.href = `/?r=${Math.random()}`;
         };
         this.state = {
             errors: [],
-            buildCount: 0,
             port: null,
         };
     }
     componentDidMount() {
+        window.s = this.socket;
+        console.log(window.s);
         this.socket.on("buildSuccess", this.buildSuccess);
         this.socket.on("buildFail", this.buildFail);
-        fetch("/appPort")
+        fetch("/devPort")
             .then(r => r.json())
             .then(r => this.setState({
             port: r.port,
@@ -42106,14 +42680,12 @@ class DevApp extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] {
         this.socket.off("buildFail", this.buildFail);
     }
     render() {
-        const { errors, buildCount, port } = this.state;
+        const { errors, port } = this.state;
         if (!port)
             return null;
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "DevApp" },
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("iframe", { className: "DevApp__app", src: `http://localhost:${port}/?b=${buildCount}` }),
-            errors.length ?
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "DevApp__errors" }, errors.map((error, e) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_devComponents_AnsiText_AnsiText__WEBPACK_IMPORTED_MODULE_3__["default"], { ansiStr: error, key: e }))) :
-                null));
+        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "DevApp" }, errors.length ?
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "DevApp__errors" }, errors.map((error, e) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_devComponents_AnsiText_AnsiText__WEBPACK_IMPORTED_MODULE_4__["default"], { ansiStr: error, key: e }))) :
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_App_App__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
 }
 
@@ -42269,6 +42841,791 @@ AnsiUtils.MUTATIONS = {
     "106": { bgColor: "cyan", intensity: "bright" },
     "107": { bgColor: "white", intensity: "bright" },
 };
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/App/App.style.scss":
+/*!*******************************************************!*\
+  !*** ./src/prod/client/components/App/App.style.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./App.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/App/App.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./App.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/App/App.tsx":
+/*!************************************************!*\
+  !*** ./src/prod/client/components/App/App.tsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
+/* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.style */ "./src/prod/client/components/App/App.style.scss");
+/* harmony import */ var _App_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_App_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pages_SetPickerPage_SetPickerPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/SetPickerPage/SetPickerPage */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
+
+
+
+
+class App extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App" },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarBackground" }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__["default"].getBEMClassName("App__sidebarContent__item", { selected: true }) },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__label" }, "Track"),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__sub" }, "manually enter cards")),
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__["default"].getBEMClassName("App__sidebarContent__item", { disabled: true }) },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__label" }, "Play"),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__sub" }, "not currently available")),
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__["default"].getBEMClassName("App__sidebarContent__item", { disabled: true }) },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__label" }, "Shape Designer"),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__sub" }, "not currently available")),
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__["default"].getBEMClassName("App__sidebarContent__item", { disabled: true }) },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__label" }, "Shade Designer"),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__sidebarContent__item__sub" }, "not currently available"))),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__toolbar" }),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "App__content" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_pages_SetPickerPage_SetPickerPage__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/Card/Card.style.scss":
+/*!*********************************************************!*\
+  !*** ./src/prod/client/components/Card/Card.style.scss ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Card.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Card/Card.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Card.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/Card/Card.tsx":
+/*!**************************************************!*\
+  !*** ./src/prod/client/components/Card/Card.tsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Card; });
+/* harmony import */ var _Card_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Card.style */ "./src/prod/client/components/Card/Card.style.scss");
+/* harmony import */ var _Card_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Card_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils/MathUtils */ "./docs/shared/utils/MathUtils.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
+
+
+
+
+class Card extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        const { children } = this.props;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: this.getStyle() },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "Card__content" }, children)));
+    }
+    getStyle() {
+        const { repressOffset, elevation, style } = this.props;
+        const offsetElevation = (elevation || 0) + 3;
+        return {
+            boxShadow: `${offsetElevation / 5}px ${offsetElevation / 5}px ${offsetElevation / 2}px 0 rgba(0, 0, 0, ${(20 / (_utils_MathUtils__WEBPACK_IMPORTED_MODULE_2__["default"].clamp(offsetElevation, 0, 40))) - 0.5})`,
+            transform: !repressOffset && elevation ? `translate(${offsetElevation / -5}%, ${offsetElevation / -5}%)` : null,
+            ...style,
+        };
+    }
+    getClassName() {
+        const { animated, className } = this.props;
+        return _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_3__["default"].getBEMClassName("Card", { animated }) + (className ? " " + className : "");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/CardPicker/CardPicker.style.scss":
+/*!*********************************************************************!*\
+  !*** ./src/prod/client/components/CardPicker/CardPicker.style.scss ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./CardPicker.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/CardPicker/CardPicker.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./CardPicker.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/CardPicker/CardPicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/prod/client/components/CardPicker/CardPicker.tsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardPicker; });
+/* harmony import */ var _CardPicker_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardPicker.style */ "./src/prod/client/components/CardPicker/CardPicker.style.scss");
+/* harmony import */ var _CardPicker_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_CardPicker_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ShapeGroup/ShapeGroup */ "./src/prod/client/components/ShapeGroup/ShapeGroup.tsx");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/DOMUtils */ "./docs/shared/utils/DOMUtils.ts");
+/* harmony import */ var _components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/TextByWidth/TextByWidth */ "./src/prod/client/components/TextByWidth/TextByWidth.tsx");
+/* harmony import */ var _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @utils/SetUtils */ "./docs/shared/utils/SetUtils.ts");
+
+
+
+
+
+
+
+class CardPicker extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.change = (card) => {
+            const { onChange } = this.props;
+            if (onChange)
+                onChange(card);
+        };
+        this.state = {};
+    }
+    render() {
+        const { card, style, invalidCards } = this.props;
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: this.getClassName(), style: style }, ["color", "shade", "shape", "count"].map((trait) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row", key: trait },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__label" },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_TextByWidth_TextByWidth__WEBPACK_IMPORTED_MODULE_5__["default"], { fraction: 0.4 }, trait)),
+            _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(3, (i) => {
+                const opCard = { ...card, [trait]: i };
+                return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, onClick: () => this.change(opCard), onTouchStart: () => this.change(opCard), className: _utils_DOMUtils__WEBPACK_IMPORTED_MODULE_4__["default"].getBEMClassName("CardPicker__row__option", {
+                        selected: card[trait] === i,
+                        invalid: _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].countInLookup(opCard, invalidCards) !== 0,
+                    }) },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "CardPicker__row__option__content" },
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({}, opCard))));
+            }))));
+    }
+    getClassName() {
+        const { className } = this.props;
+        return "CardPicker" + (className ? " " + className : "");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/JsonSvg/JsonSvg.style.scss":
+/*!***************************************************************!*\
+  !*** ./src/prod/client/components/JsonSvg/JsonSvg.style.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./JsonSvg.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/JsonSvg/JsonSvg.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./JsonSvg.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/JsonSvg/JsonSvg.tsx":
+/*!********************************************************!*\
+  !*** ./src/prod/client/components/JsonSvg/JsonSvg.tsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return JsonSvg; });
+/* harmony import */ var _JsonSvg_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JsonSvg.style */ "./src/prod/client/components/JsonSvg/JsonSvg.style.scss");
+/* harmony import */ var _JsonSvg_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_JsonSvg_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+class JsonSvg extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        const { tagName, attributes, children } = this.props.json;
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"](tagName, attributes, (children || []).map((child, index) => react__WEBPACK_IMPORTED_MODULE_1__["createElement"](JsonSvg, { key: index, json: child })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/SetCard/SetCard.style.scss":
+/*!***************************************************************!*\
+  !*** ./src/prod/client/components/SetCard/SetCard.style.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./SetCard.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/SetCard/SetCard.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./SetCard.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/SetCard/SetCard.tsx":
+/*!********************************************************!*\
+  !*** ./src/prod/client/components/SetCard/SetCard.tsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetCard; });
+/* harmony import */ var _SetCard_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SetCard.style */ "./src/prod/client/components/SetCard/SetCard.style.scss");
+/* harmony import */ var _SetCard_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_SetCard_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/ShapeGroup/ShapeGroup */ "./src/prod/client/components/ShapeGroup/ShapeGroup.tsx");
+/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+
+
+
+
+class SetCard extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        const { color, shade, shape, count, countOverride, elevation, animated, repressOffset, className, style, } = this.props;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_3__["default"], { elevation: elevation, animated: animated, className: className, style: style, repressOffset: repressOffset },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_ShapeGroup_ShapeGroup__WEBPACK_IMPORTED_MODULE_2__["default"], { color: color, shade: shade, shape: shape, count: count, countOverride: countOverride })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/Shape/Shape.style.scss":
+/*!***********************************************************!*\
+  !*** ./src/prod/client/components/Shape/Shape.style.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Shape.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/Shape/Shape.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Shape.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/Shape/Shape.tsx":
+/*!****************************************************!*\
+  !*** ./src/prod/client/components/Shape/Shape.tsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Shape; });
+/* harmony import */ var _Shape_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Shape.style */ "./src/prod/client/components/Shape/Shape.style.scss");
+/* harmony import */ var _Shape_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Shape_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @client/contexts/PrimaryContext */ "./src/prod/client/contexts/PrimaryContext.ts");
+/* harmony import */ var _components_JsonSvg_JsonSvg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/JsonSvg/JsonSvg */ "./src/prod/client/components/JsonSvg/JsonSvg.tsx");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+class Shape extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {
+            patternId: uuid__WEBPACK_IMPORTED_MODULE_4___default()(),
+        };
+    }
+    render() {
+        const { patternId } = this.state;
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_2__["default"].Consumer, null, ctx => {
+            const shape = typeof this.props.shape === "number" ? ctx.shapes[this.props.shape] : this.props.shape;
+            const shade = typeof this.props.shade === "number" ? ctx.shades[this.props.shade] : this.props.shade;
+            const color = typeof this.props.color === "number" ? ctx.colors[this.props.color] : this.props.color;
+            const { tagName, children } = shade || {};
+            const attributes = { ...shade.attributes, id: patternId };
+            return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("svg", { viewBox: "-10 -10 60 120", className: "Shape", style: { color } },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("defs", { className: "Shape__defs" },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_JsonSvg_JsonSvg__WEBPACK_IMPORTED_MODULE_3__["default"], { json: { tagName, attributes, children } })),
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("path", { d: shape, style: { fill: `url(#${patternId})` }, className: "Shape__path" }));
+        }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss":
+/*!*********************************************************************!*\
+  !*** ./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./ShapeGroup.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./ShapeGroup.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/ShapeGroup/ShapeGroup.tsx":
+/*!**************************************************************!*\
+  !*** ./src/prod/client/components/ShapeGroup/ShapeGroup.tsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ShapeGroup; });
+/* harmony import */ var _ShapeGroup_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShapeGroup.style */ "./src/prod/client/components/ShapeGroup/ShapeGroup.style.scss");
+/* harmony import */ var _ShapeGroup_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ShapeGroup_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Shape_Shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/Shape/Shape */ "./src/prod/client/components/Shape/Shape.tsx");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @client/contexts/PrimaryContext */ "./src/prod/client/contexts/PrimaryContext.ts");
+
+
+
+
+
+class ShapeGroup extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        const { shape, color, shade, countOverride } = this.props;
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "ShapeGroup" },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_client_contexts_PrimaryContext__WEBPACK_IMPORTED_MODULE_4__["default"].Consumer, null, ctx => {
+                const count = typeof countOverride === "number" ? countOverride : ctx.counts[this.props.count];
+                const maxCount = Math.max(...ctx.counts);
+                const pWidth = `${100 / maxCount}%`;
+                return _utils_Loop__WEBPACK_IMPORTED_MODULE_3__["default"].mapTimes(count, i => react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { key: i, className: "ShapeGroup__shape", style: { flexBasis: pWidth } },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Shape_Shape__WEBPACK_IMPORTED_MODULE_2__["default"], { color: color, shade: shade, shape: shape })));
+            }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/TextByWidth/TextByWidth.style.scss":
+/*!***********************************************************************!*\
+  !*** ./src/prod/client/components/TextByWidth/TextByWidth.style.scss ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./TextByWidth.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/TextByWidth/TextByWidth.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./TextByWidth.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/TextByWidth/TextByWidth.tsx":
+/*!****************************************************************!*\
+  !*** ./src/prod/client/components/TextByWidth/TextByWidth.tsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TextByWidth; });
+/* harmony import */ var _TextByWidth_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextByWidth.style */ "./src/prod/client/components/TextByWidth/TextByWidth.style.scss");
+/* harmony import */ var _TextByWidth_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_TextByWidth_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+class TextByWidth extends react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.recalculateFontSize = () => {
+            this.setState({ fontSize: this.props.fraction * react_dom__WEBPACK_IMPORTED_MODULE_2__["findDOMNode"](this).offsetWidth });
+        };
+        this.state = {
+            fontSize: 10,
+        };
+        this.resizeObserver = new ResizeObserver(this.recalculateFontSize);
+    }
+    render() {
+        const { children } = this.props;
+        const { fontSize } = this.state;
+        return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "TextByWidth", style: { fontSize } }, children);
+    }
+    componentDidMount() {
+        this.recalculateFontSize();
+        this.resizeObserver.observe(react_dom__WEBPACK_IMPORTED_MODULE_2__["findDOMNode"](this));
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.fraction !== this.props.fraction)
+            this.recalculateFontSize();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss":
+/*!*********************************************************************************!*\
+  !*** ./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader/dist/cjs.js!../../../../../../node_modules/sass-loader/dist/cjs.js!./SetPickerPage.style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var id = "!!../../../../../../node_modules/css-loader/dist/cjs.js!../../../../../../node_modules/sass-loader/dist/cjs.js!./SetPickerPage.style.scss";
+var update = api(id, content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx":
+/*!**************************************************************************!*\
+  !*** ./src/prod/client/components/pages/SetPickerPage/SetPickerPage.tsx ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SetPickerPage; });
+/* harmony import */ var _components_Card_Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @components/Card/Card */ "./src/prod/client/components/Card/Card.tsx");
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SetPickerPage.style */ "./src/prod/client/components/pages/SetPickerPage/SetPickerPage.style.scss");
+/* harmony import */ var _SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_SetPickerPage_style__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/CardPicker/CardPicker */ "./src/prod/client/components/CardPicker/CardPicker.tsx");
+/* harmony import */ var _utils_Loop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/Loop */ "./docs/shared/utils/Loop.ts");
+/* harmony import */ var _components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/SetCard/SetCard */ "./src/prod/client/components/SetCard/SetCard.tsx");
+/* harmony import */ var _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @utils/SetUtils */ "./docs/shared/utils/SetUtils.ts");
+// we need the card styles to load before
+// the page styles so we can override them
+
+
+
+
+
+
+
+class SetPickerPage extends react__WEBPACK_IMPORTED_MODULE_2__["PureComponent"] {
+    constructor(props) {
+        super(props);
+        this.submitToHistory = () => {
+            const { history, currentSet } = this.state;
+            this.setState({
+                history: [...history, currentSet],
+                currentSet: this.getBasicSet(),
+            });
+        };
+        this.state = {
+            currentSet: this.getBasicSet(),
+            history: [],
+            historyLookup: {},
+        };
+    }
+    render() {
+        const { currentSet, history, historyLookup } = this.state;
+        const invalidCards = _utils_SetUtils__WEBPACK_IMPORTED_MODULE_6__["default"].addCardToLookup(currentSet, historyLookup);
+        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage" },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main" },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content" },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__pickers" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_Card_Card__WEBPACK_IMPORTED_MODULE_0__["default"], { className: "SetPickerPage__main__content__pickers__picker", key: i },
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_CardPicker_CardPicker__WEBPACK_IMPORTED_MODULE_3__["default"], { invalidCards: invalidCards, card: card, onChange: (newCard) => {
+                                const cards = [...this.state.currentSet];
+                                cards[i] = newCard;
+                                this.setState({
+                                    currentSet: cards,
+                                });
+                            } })))),
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__main__content__cards" }, currentSet.map((card, i) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__main__content__cards__card" }, card, { key: i })))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history" },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__submit", onClick: this.submitToHistory }, "\u2B95 add set"),
+                history.map((set, s) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set", key: s },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set__cards" }, set.map((card, c) => react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_SetCard_SetCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({ className: "SetPickerPage__history__set__cards__card" }, card, { key: c })))),
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "SetPickerPage__history__set__delete", onClick: () => {
+                            const history = [...this.state.history];
+                            history.splice(s, 1);
+                            this.setState({
+                                history,
+                            });
+                        } }, "\u00D7"))))));
+    }
+    getBasicSet(i = 0) {
+        return _utils_Loop__WEBPACK_IMPORTED_MODULE_4__["default"].mapTimes(3, () => ({
+            shape: i,
+            color: i,
+            count: i,
+            shade: i,
+        }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/prod/client/contexts/PrimaryContext.ts":
+/*!****************************************************!*\
+  !*** ./src/prod/client/contexts/PrimaryContext.ts ***!
+  \****************************************************/
+/*! exports provided: primaryContextDefaultValue, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "primaryContextDefaultValue", function() { return primaryContextDefaultValue; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const primaryContextDefaultValue = {
+    shades: [
+        {
+            tagName: "pattern",
+            attributes: { x: 0, y: 0, width: 10, height: 10, patternUnits: "userSpaceOnUse" },
+            children: [{
+                    tagName: "rect",
+                    attributes: { x: 0, y: 0, width: 10, height: 10 },
+                }],
+        },
+        {
+            tagName: "pattern",
+            attributes: { x: 0, y: 0, width: 10, height: 4, patternUnits: "userSpaceOnUse" },
+            children: [{
+                    tagName: "rect",
+                    attributes: { x: 0, y: 0, width: 10, height: 2 },
+                }],
+        },
+        {
+            tagName: "pattern",
+            attributes: { x: 0, y: 0, width: 10, height: 10, patternUnits: "userSpaceOnUse" },
+        }
+    ],
+    shapes: [
+        "M 20 0 L 0 50 L 20 100 L 40 50 Z",
+        "m 13.288566,4.5598006 c 8.1737,-0.069609 23.791302,4.4549814 24.22918,22.6925614 0.200501,8.350901 -7.151987,24.223962 -7.297945,37.171249 -0.145959,12.94729 7.735822,15.87087 9.48733,22.274907 0.884237,3.233037 -7.152474,7.913466 -14.595893,8.074653 C 14.017425,95.013407 1.1739741,79.598392 1.1739741,66.511885 c 0,-13.086507 7.7358232,-16.566964 8.1737005,-32.994706 C 9.536902,26.417983 1.9037689,18.20318 0.7360975,13.7482 -0.07887725,10.638851 5.114866,4.6294098 13.288566,4.5598006 Z",
+        "M 0 25 V 75 C 0 105, 40, 105, 40, 75 V 25 C 40 -5, 0 -5, 0 25 Z",
+    ],
+    colors: ["red", "green", "purple"],
+    counts: [1, 2, 3],
+};
+const PrimaryContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(primaryContextDefaultValue);
+/* harmony default export */ __webpack_exports__["default"] = (PrimaryContext);
 
 
 /***/ }),

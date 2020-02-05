@@ -1,32 +1,41 @@
 import "./DevApp.style";
 import io from "socket.io-client";
 import * as React from "react";
+import App from "@components/App/App";
 import AnsiText from "@devComponents/AnsiText/AnsiText";
 
 export interface DevAppProps { }
 export interface DevAppState {
 	errors: string[];
-	buildCount: number;
 	port: number;
 }
 
+declare global {
+	export interface Window {
+		s: SocketIOClient.Socket;
+	}
+}
+
 export default class DevApp extends React.PureComponent<DevAppProps, DevAppState> {
-	private socket = io();
+	private socket = io({
+		port: "3001",
+	});
 
 	constructor(props: DevAppProps) {
 		super(props);
 		this.state = {
 			errors: [],
-			buildCount: 0,
 			port: null,
 		};
 	}
 
 	public componentDidMount() {
+		window.s = this.socket;
+		console.log(window.s);
 		this.socket.on("buildSuccess", this.buildSuccess);
 		this.socket.on("buildFail", this.buildFail);
 
-		fetch("/appPort")
+		fetch("/devPort")
 			.then(r => r.json())
 			.then(r => this.setState({
 				port: r.port,
@@ -39,43 +48,42 @@ export default class DevApp extends React.PureComponent<DevAppProps, DevAppState
 	}
 
 	public render(): React.ReactNode {
-		const { errors, buildCount, port } = this.state;
+		const { errors, port } = this.state;
 
 		if (!port) return null;
 
 		return (
 			<div className="DevApp">
-				<iframe className="DevApp__app" src={`http://localhost:${port}/?b=${buildCount}`} />
 				{
 					errors.length ?
 						<div className="DevApp__errors">{
 							errors.map((error, e) => <AnsiText ansiStr={error} key={e} />)
 						}</div> :
-						null
+						<App />
 				}
 			</div>
-		)
+		);
 	}
 
 	private buildSuccess = () => {
+		console.log("buildSuccess");
 		this.setState({
 			errors: [],
 		});
 
-		this.incrementBuild();
+		this.reloadPage();
 	};
 
 	private buildFail = (errors: string[]) => {
+		console.log("buildFail");
 		this.setState({
 			errors,
 		});
 
-		this.incrementBuild();
+		this.reloadPage();
 	};
 
-	private incrementBuild = () => {
-		this.setState({
-			buildCount: this.state.buildCount + 1
-		});
+	private reloadPage = () => {
+		window.location.href = `/?r=${Math.random()}`;
 	};
 }

@@ -4,7 +4,7 @@ import http from "http";
 import app from "./server";
 
 require("dotenv").config();
-process.env.APP_PORT = process.env.APP_PORT || "3001";
+process.env.APP_PORT = process.env.APP_PORT || "3000";
 
 const server = http.createServer(app);
 

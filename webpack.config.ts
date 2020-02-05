@@ -1,10 +1,11 @@
 import path from "path";
 import { Configuration } from "webpack";
+import { TSConfig } from "src/dev/shared/typings/tsconfig";
 
-const tsconfig = require("./tsconfig");
+const tsconfig: TSConfig = require("./tsconfig");
 
 const tsPaths = tsconfig.compilerOptions.paths;
-const tsPathKeys = Object.keys(tsPaths)
+const tsPathKeys = Object.keys(tsPaths);
 
 const aliases = tsPathKeys.reduce((aliases, tsPathKey) => {
 	const tsPath = tsPaths[tsPathKey];
@@ -19,7 +20,7 @@ const config: Configuration = {
 	mode: isDev ? "development" : "production",
 	entry: {
 		index: "./src/prod/client/prod.tsx",
-		dev: "./src/dev/client/dev.tsx"
+		dev: "./src/dev/client/dev.tsx",
 	},
 	output: {
 		path: path.resolve(__dirname, "docs/build"),
@@ -29,13 +30,13 @@ const config: Configuration = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				use: ["ts-loader"]
+				use: ["ts-loader"],
 			},
 			{
 				test: /\.scss$/,
-				use: ["style-loader", "css-loader", "sass-loader"]
+				use: ["style-loader", "css-loader", "sass-loader"],
 			},
-		]
+		],
 	},
 	resolve: {
 		extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"],

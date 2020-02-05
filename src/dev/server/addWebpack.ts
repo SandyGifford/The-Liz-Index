@@ -3,7 +3,7 @@ import socket from "socket.io";
 import webpackConfig from "../../../webpack.config";
 import { Server } from "http";
 
-export default (server: Server, buildComplete = () => { }) => {
+export default (server: Server, buildComplete = (): void => undefined) => {
 	const io = socket(server);
 
 	let lastFail: string[];
